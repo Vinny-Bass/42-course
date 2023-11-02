@@ -1,11 +1,18 @@
-int	is_numeric(char c)
-{
-	if (c < 48 || c > 57)
-		return (0);
-	return (1);
-}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vsouza-v <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/01 20:42:56 by vsouza-v          #+#    #+#             */
+/*   Updated: 2023/11/01 20:42:57 by vsouza-v         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int	ft_atoi(char *str)
+#include "libft.h"
+
+int	ft_atoi(const char *str)
 {
 	int	i;
 	int	minus_count;
@@ -18,9 +25,9 @@ int	ft_atoi(char *str)
 	{
 		if (str[i] == '-')
 			minus_count++;
-		if (is_numeric(str[i]))
+		if (ft_isdigit(str[i]))
 		{
-			while (str[i] != '\0' && is_numeric(str[i]))
+			while (str[i] != '\0' && ft_isdigit(str[i]))
 			{
 				result *= 10;
 				result += str[i] - 48;

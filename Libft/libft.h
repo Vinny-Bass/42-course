@@ -22,3 +22,4 @@ int 	ft_toupper(int c);
 int 	ft_tolower(int c);
 char 	*ft_strnstr(const char *,	const char *, size_t );
 int 	ft_atoi(const char *);
+void 	*ft_calloc(size_t, size_t);

@@ -12,22 +12,20 @@
 
 #include <stdlib.h>
 
-int	ft_memcmp(const void *str1, const void *str2, size_t n)
+int	ft_memcmp(const void *str1, const void *str2, size_t n_bytes)
 {
-	unsigned int	i;
 	char			*s1;
 	char			*s2;
 
-	i = 0;
-	s1 = (char *) str1;
-	s2 = (char *) str2;
-	while ((s1[i] != '\0' || s2[i] != '\0') && i < n)
+	s1 = (char *)str1;
+	s2 = (char *)str2;
+	while (n_bytes > 0)
 	{
-		if (s1[i] > s2[i])
-			return (1);
-		else if (s1[i] < s2[i])
-			return (-1);
-		i++;
+		if (*s1 != *s2)
+			return (*s1 - *s2);
+		n_bytes--;
+		s1++;
+		s2++;
 	}
 	return (0);
 }

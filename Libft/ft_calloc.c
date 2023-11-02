@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsouza-v <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 18:41:49 by vsouza-v          #+#    #+#             */
-/*   Updated: 2023/10/30 18:41:51 by vsouza-v         ###   ########.fr       */
+/*   Created: 2023/11/01 22:49:49 by vsouza-v          #+#    #+#             */
+/*   Updated: 2023/11/01 22:49:51 by vsouza-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdlib.h>
 #include "libft.h"
 
-int	ft_isalnum(int c)
+void	*ft_calloc(size_t nitems, size_t size)
 {
-	if (ft_isalpha(c))
-	{
-		return (1);
-	}
-	if (c >= 48 && c <= 57)
-	{
-		return (1);
-	}
-	return (0);
+	void	*arr;
+
+	arr = malloc(nitems * size);
+	if (arr == 0)
+		return (NULL);
+	return (ft_memset(arr, 0, nitems * size));
 }

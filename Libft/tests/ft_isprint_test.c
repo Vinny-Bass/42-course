@@ -1,5 +1,5 @@
 #include <ctype.h>
-#include "../ft_libft.h"
+#include "../libft.h"
 
 int main()
 {
