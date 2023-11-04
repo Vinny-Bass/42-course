@@ -10,33 +10,53 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <limits.h>
 #include "libft.h"
+
+static int check_overflow(int result, int digit) {
+    if (result > INT_MAX / 10 || (result == INT_MAX / 10 && digit > INT_MAX % 10)) {
+        return 1;
+    }
+    return 0;
+}
+
+static int check_underflow(int result, int digit) {
+    if (result > -(INT_MIN / 10) || (result == -(INT_MIN / 10) && digit > -(INT_MIN % 10))) {
+        return 1;
+    }
+    return 0;
+}
 
 int	ft_atoi(const char *str)
 {
 	int	i;
-	int	minus_count;
+	int	sign;
 	int	result;
+	int digit;
 
 	i = 0;
-	minus_count = 0;
+	sign = 1;
 	result = 0;
-	while (str[i] != '\0' && !result)
+	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
+		i++;
+	
+	if (str[i] == '-' || str[i] == '+')
 	{
 		if (str[i] == '-')
-			minus_count++;
-		if (ft_isdigit(str[i]))
-		{
-			while (str[i] != '\0' && ft_isdigit(str[i]))
-			{
-				result *= 10;
-				result += str[i] - 48;
-				i++;
-			}
-		}
+			sign = -1;
 		i++;
 	}
-	if (minus_count % 2 == 0)
-		return (result);
-	return (result *= -1);
+
+	while (str[i] != '\0' && ft_isdigit(str[i]))
+	{
+		digit = str[i] - 48;
+		if (sign == 1 && check_overflow(result, digit))
+			return INT_MAX;
+		if (sign == -1 && check_underflow(result, digit))
+			return INT_MIN;
+		result = result * 10 + digit;
+		i++;
+	}
+
+	return result * sign;
 }

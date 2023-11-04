@@ -12,29 +12,29 @@
 #include <stdlib.h>
 #include "libft.h"
 
-size_t	ft_strlcat(char *dest, const char *src, size_t size)
+size_t	ft_strlcat(char *dest, const char *to_concat, size_t size)
 {
-	unsigned int	i;
-	unsigned int	j;
-	unsigned int	dest_len;
-	unsigned int	src_len;
+	size_t	i;
+	size_t	dest_len;
+	size_t	to_concat_len;
 
+	dest_len = 0;
+	to_concat_len = ft_strlen(to_concat);
 	i = 0;
-	j = 0;
-	while (dest[j] != '\0')
+	while (dest[dest_len] != '\0' && dest_len < size)
+		dest_len++;
+	
+	if (size <= dest_len)
+		return (to_concat_len + size);
+	while (to_concat[i] != '\0' && (dest_len + i) < (size - 1))
 	{
-		j++;
-	}
-	dest_len = j;
-	src_len = ft_strlen(src);
-	if (size == 0 || size <= dest_len)
-		return (src_len + size);
-	while (src [i] != '\0' && i < size - dest_len - 1)
-	{
-		dest[j] = src[i];
+		dest[dest_len + i] = to_concat[i];
 		i++;
-		j++;
 	}
-	dest[j] = '\0';
-	return (dest_len + src_len);
+	if (dest_len + i < size)
+    {
+        dest[dest_len + i] = '\0';
+    }
+
+	return (dest_len + to_concat_len);
 }

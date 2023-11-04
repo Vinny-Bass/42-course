@@ -17,6 +17,10 @@ void	*ft_calloc(size_t nitems, size_t size)
 {
 	void	*arr;
 
+	if (size != 0 && nitems > SIZE_MAX / size) {
+        return NULL;
+    }
+	
 	arr = malloc(nitems * size);
 	if (arr == 0)
 		return (NULL);

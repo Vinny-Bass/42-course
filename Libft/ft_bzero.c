@@ -14,14 +14,13 @@
 
 void	ft_bzero(void *str, size_t n)
 {
-	unsigned char	*destiny;
+	unsigned char	*pointer;
 
-	destiny = str;
+	pointer = str;
 	while (n > 0)
 	{
-		*destiny = '\0';
-		destiny++;
+		*pointer = 0;
+		pointer++;
 		n--;
 	}
-	return ;
 }

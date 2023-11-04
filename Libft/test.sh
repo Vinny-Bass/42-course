@@ -54,6 +54,9 @@ for file in tests/*_test.c; do
 
 	if [ $? -ne 0 ]; then
 		echo_error "$file -> testing failing"
+		rm "${file%.c}"
+		rm "${file%.c}.o"
+		break
 	else
 		echo_success "$file -> testing ok"
 	fi

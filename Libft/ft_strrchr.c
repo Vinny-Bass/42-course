@@ -9,18 +9,24 @@
 /*   Updated: 2023/10/30 22:32:11 by vsouza-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <stdlib.h>
 
 char	*ft_strrchr(const char *str, int c)
 {
-	int			i;
-	const char	*tmp;
+	const char	*last_occurrence;
 
-	i = 0;
-	while (str[i])
+	last_occurrence = NULL;
+	while (*str)
 	{
-		if ((int)str[i] == c)
-			tmp = &str[i];
-		i++;
+		if (*str == (char)c)
+		{
+			last_occurrence = str;
+		}
+		str++;
 	}
-	return ((char *)tmp);
+	if ((char)c == '\0')
+	{
+		return (char*)str;
+	}
+	return (char*)last_occurrence;
 }

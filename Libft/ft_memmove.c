@@ -14,27 +14,25 @@
 
 void	*ft_memmove(void *to, const void *from, size_t numBytes)
 {
-	char			*src_char;
-	char			*dest_char;
-	char			*tmp;
-	unsigned int	i;
+	const unsigned char			*src_char;
+	unsigned char				*dest_char;
 
-	src_char = (char *)from;
-	dest_char = (char *)to;
-	tmp = (char *)malloc(sizeof(char) * numBytes);
-	if (tmp == NULL)
-		return (NULL);
-	i = 0;
-	while (i < numBytes)
+	src_char = (const unsigned char *)from;
+	dest_char = (unsigned char *)to;
+
+	if (dest_char < src_char)
 	{
-		*(tmp + i) = *(src_char + i);
-		i++;
-	}
-	i = 0;
-	while (i < numBytes)
+		while (numBytes--) {
+            *dest_char++ = *src_char++;
+        }
+	} else if (dest_char > src_char)
 	{
-		*(dest_char + i) = *(tmp + i);
-		i++;
+        src_char += numBytes;
+        dest_char += numBytes;
+        while (numBytes--) {
+            *(--dest_char) = *(--src_char);
+        }
 	}
+
 	return (to);
 }
