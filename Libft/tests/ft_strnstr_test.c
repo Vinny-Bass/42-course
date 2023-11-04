@@ -4,7 +4,6 @@
 
 int main()
 {
-	return (0);
 	const char haystack[20] = "vinnyBass";
 	const char needle[10] = "Bass";
 	char *ret;

@@ -30,6 +30,7 @@ char	*solve(char *str, char *to_find, size_t size)
 			if (!to_find[j])
 				return (&str[found]);
 		}
+		i++;
 	}
 	return (NULL);
 }
