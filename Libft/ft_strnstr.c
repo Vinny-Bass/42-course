@@ -12,11 +12,22 @@
 
 #include <stdlib.h>
 
+static int	validate_next_char(char *str, char *to_find, int i, int j)
+{
+	if (!str[i + j])
+		return (0);
+	if (!to_find[j])
+		return (0);
+	if (!(str[i + j] == to_find[j]))
+		return (0);
+	return (1);
+}
+
 char	*solve(char *str, char *to_find, size_t size)
 {
-	size_t	j;
 	size_t	i;
-	size_t found;
+	size_t	j;
+	size_t	found;
 
 	i = 0;
 	while (str[i] && i < size)
@@ -25,7 +36,7 @@ char	*solve(char *str, char *to_find, size_t size)
 		if (str[i] == to_find[j])
 		{
 			found = i;
-			while (str[i+j] && to_find[j] && i+j < size && str[i+j] == to_find[j])
+			while (validate_next_char(str, to_find, i, j) && i + j < size)
 				j++;
 			if (!to_find[j])
 				return (&str[found]);

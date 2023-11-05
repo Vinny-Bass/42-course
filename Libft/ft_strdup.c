@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsouza-v <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 19:50:09 by vsouza-v          #+#    #+#             */
-/*   Updated: 2023/10/30 19:50:10 by vsouza-v         ###   ########.fr       */
+/*   Created: 2023/11/04 18:40:25 by vsouza-v          #+#    #+#             */
+/*   Updated: 2023/11/04 18:40:27 by vsouza-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-void	*ft_memcpy(void *to, const void *from, size_t numBytes)
+char	*ft_strdup(const char *s)
 {
-	const unsigned char			*src_char;
-	unsigned char				*dest_char;
+	char	*cpy;
+	int		i;
+	int		src_len;
 
-	src_char = (const unsigned char *)from;
-	dest_char = (unsigned char *)to;
-	while (numBytes--)
+	i = 0;
+	src_len = ft_strlen(s);
+	cpy = malloc(sizeof(char) * (src_len + 1));
+	if (cpy == 0)
+		return (NULL);
+	while (s[i] != '\0')
 	{
-		*dest_char++ = *src_char++;
+		cpy[i] = s[i];
+		i++;
 	}
-	return (to);
+	cpy[i] = '\0';
+	return (cpy);
 }

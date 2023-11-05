@@ -6,8 +6,9 @@ char* test(int size)
 {
     char string[] = "Hello there, Venus";
     static char buffer[19];
+    int r;
 
-    ft_strlcpy(buffer,string,size);
+    r = ft_strlcpy(buffer,string,size);
 
     return buffer;
 }

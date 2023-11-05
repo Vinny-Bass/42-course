@@ -15,24 +15,21 @@
 void	*ft_memmove(void *to, const void *from, size_t numBytes)
 {
 	const unsigned char			*src_char;
-	unsigned char				*dest_char;
+	char unsigned				*dest_char;
 
 	src_char = (const unsigned char *)from;
 	dest_char = (unsigned char *)to;
-
 	if (dest_char < src_char)
 	{
-		while (numBytes--) {
-            *dest_char++ = *src_char++;
-        }
-	} else if (dest_char > src_char)
-	{
-        src_char += numBytes;
-        dest_char += numBytes;
-        while (numBytes--) {
-            *(--dest_char) = *(--src_char);
-        }
+		while (numBytes--)
+			*dest_char++ = *src_char++;
 	}
-
+	else if (dest_char > src_char)
+	{
+		src_char += numBytes;
+		dest_char += numBytes;
+		while (numBytes--)
+			*(--dest_char) = *(--src_char);
+	}
 	return (to);
 }

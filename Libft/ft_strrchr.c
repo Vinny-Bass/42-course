@@ -19,14 +19,10 @@ char	*ft_strrchr(const char *str, int c)
 	while (*str)
 	{
 		if (*str == (char)c)
-		{
 			last_occurrence = str;
-		}
 		str++;
 	}
 	if ((char)c == '\0')
-	{
-		return (char*)str;
-	}
-	return (char*)last_occurrence;
+		return ((char *)str);
+	return ((char *)last_occurrence);
 }
