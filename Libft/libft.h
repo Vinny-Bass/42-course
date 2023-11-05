@@ -1,4 +1,7 @@
 #include <stdlib.h>
+#include <limits.h>
+#include <stdint.h>
+#include <stdio.h>
 
 int 	ft_isalnum(int);
 int 	ft_isalpha(int);

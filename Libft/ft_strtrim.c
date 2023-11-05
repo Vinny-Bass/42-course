@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
 #include "libft.h"
 
 static int	count_begin(char const *s1, char c)
@@ -31,11 +29,9 @@ static int	count_begin(char const *s1, char c)
 
 static int	count_end(char const *s1, char c)
 {
-	int		i;
 	int		total;
 	int		s1_len;
 
-	i = 0;
 	total = 0;
 	s1_len = ft_strlen(s1);
 	while (s1_len > 0 && s1[s1_len - 1] == c)
