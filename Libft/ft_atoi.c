@@ -9,7 +9,6 @@
 /*   Updated: 2023/11/01 20:42:57 by vsouza-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 static int	check_overflow(int result, int digit)
