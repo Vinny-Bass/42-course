@@ -10,7 +10,7 @@ int test_ft_substr(void) {
     char const *str1 = "Hello, World!";
     char *sub1 = ft_substr(str1, 7, 5);
     if (strcmp(sub1, "World") != 0) fail = 1;
-    free(sub1); // Always free memory to prevent leaks
+    free(sub1);
 
     // Test 2: 'start' index beyond the end of the string
     char *sub2 = ft_substr(str1, 20, 5);
@@ -29,7 +29,7 @@ int test_ft_substr(void) {
 
     // Test 5: Original string 's' is NULL
     char *sub5 = ft_substr(NULL, 7, 5);
-    if (sub5 != NULL) fail = 1; // Assuming function should safely handle NULL inputs
+    if (sub5 != NULL) fail = 1;
 
     return fail;
 }
