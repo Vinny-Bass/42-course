@@ -66,6 +66,5 @@ int main() {
     val = ft_atoi(str);
     if (val != INT_MAX) return 1;
 
-    printf("All tests passed!\n");
     return 0;
 }

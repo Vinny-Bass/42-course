@@ -13,8 +13,8 @@ int test_strtrim(const char *test, const char *set, const char *expected) {
         return 0;
     }
     
-    printf("Test failed:\nInput: '%s'\nSet: '%s'\nExpected: '%s'\nGot: '%s'\n",
-           test, set, expected, result ? result : "NULL");
+    // printf("Test failed:\nInput: '%s'\nSet: '%s'\nExpected: '%s'\nGot: '%s'\n",
+    //        test, set, expected, result ? result : "NULL");
     free(result);
     return 1;
 }

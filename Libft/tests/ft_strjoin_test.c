@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-char *ft_strjoin(char const *s1, char const *s2);
+#include "../libft.h"
 
 int test_ft_strjoin(void) {
     int fail = 0;
@@ -36,18 +32,16 @@ int test_ft_strjoin(void) {
     char *result5 = ft_strjoin(NULL, s2);
     char *result6 = ft_strjoin(s1, NULL);
     if (result5 != NULL || result6 != NULL) fail = 1;
-    free(result5); // Free if not NULL, should be handled in ft_strjoin
-    free(result6); // Free if not NULL, should be handled in ft_strjoin
+    free(result5);
+    free(result6);
 
     return fail;
 }
 
 int main(void) {
     if (test_ft_strjoin() == 0) {
-        printf("All tests passed successfully.\n");
         return 0;
     } else {
-        printf("One or more tests failed.\n");
         return 1;
     }
 }

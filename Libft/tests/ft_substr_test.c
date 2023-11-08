@@ -36,10 +36,8 @@ int test_ft_substr(void) {
 
 int main(void) {
     if (test_ft_substr() == 0) {
-        printf("All tests passed successfully.\n");
         return 0;
     } else {
-        printf("One or more tests failed.\n");
         return 1;
     }
 }
