@@ -15,10 +15,14 @@ void	*ft_calloc(size_t nitems, size_t size)
 {
 	void	*arr;
 
-	if (size != 0 && nitems > SIZE_MAX / size)
+	if (size != 0 && nitems > (SIZE_MAX / size))
 		return (NULL);
 	arr = malloc(nitems * size);
 	if (arr == 0)
+	{
+		free(arr);
 		return (NULL);
+	}
+		
 	return (ft_memset(arr, 0, nitems * size));
 }
