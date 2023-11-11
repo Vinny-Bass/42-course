@@ -11,81 +11,62 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-static int	count_occ(char const *s, char c)
+static int	word_count(const char *s, char c)
 {
 	int	count;
-	int	i;
+	int	in_word;
 
-	i = 0;
 	count = 0;
-	while (s[i])
+	in_word = 0;
+	while (*s)
 	{
-		if ((char)s[i] == c)
+		if (*s != c && in_word == 0)
+		{
+			in_word = 1;
 			count++;
-		i++;
+		}
+		else if (*s == c)
+		{
+			in_word = 0;
+		}
+		s++;
 	}
 	return (count);
 }
 
-static void	init_controllers(int *i, int *begin, int *word, int *controller)
+void	init_controllers(int *word_index, int *start, int *end)
 {
-	*i = 0;
-	*begin = 0;
-	*word = 0;
-	*controller = 0;
+	*word_index = 0;
+	*start = 0;
+	*end = 0;
 }
 
-static void	handle_controllers(char **r, int *word, int *c, int *begin)
+char	**ft_split(const char *s, char c)
 {
-	r[*word][*c + 1] = '\0';
-	*word += 1;
-	*begin += 1;
-	*c = 0;
-}
-
-static void	insert_words(char *s, char c, char **result)
-{
-	int	i;
-	int	begin;
-	int	word;
-	int	controller;
-
-	init_controllers(&i, &begin, &word, &controller);
-	while (s[i])
-	{
-		if ((char)s[i] == c || !s[i + 1])
-		{
-			if (!s[i + 1])
-				i++;
-			result[word] = malloc((i - begin) + 1);
-			while (begin < i)
-			{
-				result[word][controller] = s[begin];
-				begin++;
-				controller++;
-			}
-			handle_controllers(result, &word, &controller, &begin);
-		}
-		i++;
-	}
-	result[word] = NULL;
-}
-
-char	**ft_split(char const *s, char c)
-{
-	char	*trim_s;
+	int		words;
 	char	**result;
+	int		word_index;
+	int		start;
+	int		end;
 
-	trim_s = ft_strtrim(s, &c);
-	result = malloc((count_occ(trim_s, c) + 2) * sizeof (char *));
-	if (!result)
-	{
-		free(trim_s);
+	words = word_count(s, c);
+	init_controllers(&word_index, &start, &end);
+	if (!s)
 		return (NULL);
+	result = malloc((words + 1) * sizeof(char *));
+	if (!result)
+		return (NULL);
+	while (s[end])
+	{
+		if (s[end] != c && (end == 0 || s[end - 1] == c))
+			start = end;
+		if (s[end] == c && (end > 0 && s[end - 1] != c))
+			result[word_index++] = strndup(s + start, end - start);
+		end++;
 	}
-	insert_words(trim_s, c, result);
-	free(trim_s);
+	if (s[end - 1] != c)
+		result[word_index++] = strndup(s + start, end - start);
+	result[words] = (NULL);
 	return (result);
 }
