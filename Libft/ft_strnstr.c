@@ -23,7 +23,7 @@ static int	validate_next_char(char *str, char *to_find, int i, int j)
 	return (1);
 }
 
-char	*solve(char *str, char *to_find, size_t size)
+static char	*solve(char *str, char *to_find, size_t size)
 {
 	size_t	i;
 	size_t	j;
@@ -48,6 +48,8 @@ char	*solve(char *str, char *to_find, size_t size)
 
 char	*ft_strnstr(const char *str, const char *to_find, size_t size)
 {
+	if (!str && size == 0)
+		return (NULL);
 	if (to_find[0] == '\0')
 		return ((char *)str);
 	return (solve((char *)str, (char *)to_find, size));

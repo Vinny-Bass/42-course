@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	count_digits(int n)
+static int	count_digits(int n)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ int	count_digits(int n)
 	return (i);
 }
 
-void	handle_negative(char *result, int n, int n_digits)
+static void	handle_negative(char *result, long n, int n_digits)
 {
 	n *= -1;
 	result[0] = '-';
@@ -39,7 +39,7 @@ void	handle_negative(char *result, int n, int n_digits)
 	}
 }
 
-void	handle_positive(char *result, int n, int n_digits)
+static void	handle_positive(char *result, int n, int n_digits)
 {
 	result[n_digits - 1] = '\0';
 	n_digits -= 2;
@@ -51,7 +51,7 @@ void	handle_positive(char *result, int n, int n_digits)
 	}
 }
 
-char	*handle_zero(void)
+static char	*handle_zero(void)
 {
 	char	*result;
 
