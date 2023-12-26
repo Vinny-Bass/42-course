@@ -2,16 +2,6 @@
 	✏️ ft_printf
 </h1>
 
-<p align="center">
-	<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/Vinny-bass/42-course/tree/main/Ft_printf?color=lightblue" />
-	<img alt="Number of lines of code" src="https://img.shields.io/tokei/lines/github/Vinny-bass/42-course/tree/main/Ft_printf?color=critical" />
-	<img alt="Code language count" src="https://img.shields.io/github/languages/count/Vinny-bass/42-course/tree/main/Ft_printf?color=yellow" />
-	<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/Vinny-bass/42-course/tree/main/Ft_printf?color=blue" />
-	<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Vinny-bass/42-course/tree/main/Ft_printf?color=green" />
-</p>
-
----
-
 ## 💡 About the project
 
 > _Recoded version of printf._
