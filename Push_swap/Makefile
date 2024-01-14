@@ -2,7 +2,7 @@ NAME = main.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = list_utils.c main.c operations_utils.c operations.c utils.c handler.c
+SRCS = list_utils.c main.c operations_utils.c operations.c utils.c simple_sort.c quick_sort.c
 OBJS = $(SRCS:.c=.o)
 
 LIBFT = ./libft

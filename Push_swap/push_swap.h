@@ -32,6 +32,9 @@ void		rotate(char command, t_stack **a, t_stack **b, int inverse);
 void		rotate_stack(t_stack **stack, int reverse);
 void		add_node_on_top(t_stack **lst, t_stack *new);
 int			ft_isnumber(char *str);
-void 		handle_operations(t_stack **a, t_stack **b);
+void 		simple_sort(t_stack **a, t_stack **b);
+void 		quick_sort(t_stack **stack, int size);
+void 		print_stack(const char *label, t_stack *stack);
+int 		is_ordered(t_stack *stack, int primary_stack);
 
 #endif

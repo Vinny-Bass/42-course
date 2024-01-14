@@ -1,16 +1,16 @@
 #include "push_swap.h"
 
-void print_stack(const char *label, t_stack *stack) {
-    printf("%s: ", label);
-    for (t_stack *curr = stack; curr != NULL; curr = curr->next) {
-        printf("%d ", curr->n);
-    }
-    printf("\n");
-}
+// void print_stack(const char *label, t_stack *stack) {
+//     printf("%s: ", label);
+//     for (t_stack *curr = stack; curr != NULL; curr = curr->next) {
+//         printf("%d ", curr->n);
+//     }
+//     printf("\n");
+// }
 
-static int is_ordered(t_stack *stack, int primary_stack)
+int is_ordered(t_stack *stack, int primary_stack)
 {
-    while (stack->next)
+    while (stack && stack->next)
     {
         if (primary_stack && stack->n > stack->next->n) 
             return(0);
@@ -37,15 +37,12 @@ static void exec_operations_b(t_stack **a, t_stack **b)
         {
             rotate('b', a, b, 1);
             last = get_last_node(*b);
-
             continue;
         }
         if ((*b)->n > (*b)->next->n)
         {
             push('a', a, b);
-
         }
-
     }
 }
 
@@ -56,19 +53,15 @@ static void exec_operations_a(t_stack **a, t_stack **b)
     last = get_last_node(*a);
     while (!is_ordered((*a), 1))
     {
-        // printf("Current: %d\n", (*a)->n);
-        // printf("Next: %d\n", (*a)->next->n);
         if ((*a)->n > (*a)->next->n)
         {
             swap('a', a, b);
-
             continue;
         }
         if (last->n < (*a)->n)
         {
             rotate('a', a, b, 1);
             last = get_last_node(*a);
-
             continue;
         }
         if ((*a)->n < (*a)->next->n)
@@ -79,10 +72,8 @@ static void exec_operations_a(t_stack **a, t_stack **b)
     }
 }
 
-void handle_operations(t_stack **a, t_stack **b)
+void simple_sort(t_stack **a, t_stack **b)
 {
-    //t_stack *last;
-
     if (!a || !(*a)->next)
         return ;
 
@@ -93,7 +84,5 @@ void handle_operations(t_stack **a, t_stack **b)
         push('a', a, b);
         exec_operations_a(a, b);
     }
-    // print_stack("Stack A after", *a);
-    // print_stack("Stack b after", *b);
     return ;
 }

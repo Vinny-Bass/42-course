@@ -1,18 +1,10 @@
 #include "push_swap.h"
 
-// void print_stack(const char *label, t_stack *stack) {
-//     printf("%s: ", label);
-//     for (t_stack *curr = stack; curr != NULL; curr = curr->next) {
-//         printf("%d ", curr->n);
-//     }
-//     printf("\n");
-// }
-
 int main(int argc, char **argv)
 {
     int i;
     t_stack *stack;
-    t_stack *stack_b;
+    //t_stack *stack_b;
     t_stack *node;
 
     if (argc < 2)
@@ -25,6 +17,7 @@ int main(int argc, char **argv)
     i = argc - 1;
     stack = create_node(ft_atoi(argv[i]));
     i--;
+    int j = 1;
     while (i > 0)
     {
         // [TODO] verify duplicates
@@ -36,14 +29,17 @@ int main(int argc, char **argv)
         node = create_node(ft_atoi(argv[i]));
         add_node_on_top(&stack, node);
         i--;
+        j++;
     }
-    stack_b = NULL;
+    //printf("size: %d", j);
+    //stack_b = NULL;
 
-    handle_operations(&stack, &stack_b);
+    //handle_operations(&stack, &stack_b);
+    quick_sort(&stack, j);
 
     // Print final stacks
-    // print_stack("Stack A after", stack);
-    // print_stack("Stack b after", stack_b);
+    //print_stack("Stack A after", stack);
+    //print_stack("Stack b after", stack_b);
 
     // [TODO] verify for int overflow
     // [TODO] free list after finishes

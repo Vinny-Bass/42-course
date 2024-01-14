@@ -13,3 +13,11 @@ int	ft_isnumber(char *str)
 	}
 	return (1);
 }
+
+void print_stack(const char *label, t_stack *stack) {
+    printf("%s: ", label);
+    for (t_stack *curr = stack; curr != NULL; curr = curr->next) {
+        printf("%d ", curr->n);
+    }
+    printf("\n");
+}
