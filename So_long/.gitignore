@@ -1,0 +1,10 @@
+ft_printf/*.o
+ft_printf/*.a
+get_next_line/*.o
+get_next_line/*.a
+libft/*.o
+libft/*.a
+*.a
+*.o
+game
+main.h
