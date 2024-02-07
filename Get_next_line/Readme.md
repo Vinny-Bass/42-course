@@ -39,4 +39,5 @@ fd 4, then 5, then once again 3, once again 4, and so forth.
 * Max 5 functions per file
 * Max 5 vars per function
 * Max 4 arguments
-
+* Only the while loop structure is available
+* No external libs or functions allowed, except for malloc and free.

@@ -33,6 +33,8 @@ under all conversions.
 * Max 5 functions per file
 * Max 5 vars per function
 * Max 4 arguments
+* Only the while loop structure is available
+* No external libs or functions allowed, except for malloc and free.
 
 ---
 ## 🛠️ Usage

@@ -1,18 +1,22 @@
-# 42 Libft Project
+<h1 align="center">
+	✏️ ft_libft
+</h1>
 
-This project consists in create our own version of some c standard functions along with some custom ones.
+## 💡 About the project
 
-## How to test
+The purpose of this project is to code a small data exchange program using UNIX signals.
 
-If you want to test the function in this repo just run `./test.sh`.
+---
+### Limitations
 
-If you are a 42 student and want to include this tests in your project to check if your functions are passing, do the following:
+* Max 25 lines per function
+* Max 5 functions per file
+* Max 5 vars per function
+* Max 4 arguments
+* Only the while loop structure is available
+* No external libs or functions allowed, except for malloc and free.
 
-1. Create a `.gitignore` file inside your `Libft` project
-2. Add the following lines:
-    ```
-    tests
-    test.sh
-    ```
-3. Copy the tests folder into you `Libft` project
-4. Run `./test.sh`
+### 📋 Testing
+
+1. `cd libftTester`
+2. `make m`
