@@ -1,19 +1,29 @@
-NAME = main.a
-CC = cc
+NAME = push_swap
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = list_utils.c main.c operations_utils.c operations.c utils.c simple_sort.c quick_sort.c
+SRCS =	src/operations/operations_utils.c \
+		src/operations/operations.c \
+		src/sorting/simple_sort.c \
+		src/utils/list_utils.c \
+		src/utils/arr_utils.c \
+		src/utils/memory_utils.c \
+		src/utils/utils.c \
+		src/errors/errors.c \
+		src/main.c
 OBJS = $(SRCS:.c=.o)
 
-LIBFT = ./libft
+LIBFT = ./libs/libft
 LIBFT_LIB = $(LIBFT)/libft.a
+FT_PRINT_F = ./libs/ft_printf
+FT_PRINT_F_LIB = $(FT_PRINT_F)/libftprintf.a
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 		make -C $(LIBFT)
-		cp $(LIBFT_LIB) $(NAME)
-		$(CC) $(CFLAGS) $(OBJS) $(NAME) -o push_swap
+		make -C $(FT_PRINT_F)
+		$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT_LIB) $(FT_PRINT_F_LIB)
 
 bonus: $(OBJS)
 		make -C $(LIBFT)
@@ -21,11 +31,14 @@ bonus: $(OBJS)
 		ar rcs $(NAME) $(OBJS)
 
 clean:
+		make clean -C $(LIBFT)
+		make clean -C $(FT_PRINT_F)
 		rm -f $(OBJS)
 
 fclean: clean
+		make fclean -C $(LIBFT)
+		make fclean -C $(FT_PRINT_F)
 		rm -rf $(NAME)
-
 
 re: fclean all
 
