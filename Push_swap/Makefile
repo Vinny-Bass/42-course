@@ -1,5 +1,5 @@
 NAME = push_swap
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 SRCS =	src/operations/operations_utils.c \

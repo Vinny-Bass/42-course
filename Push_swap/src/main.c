@@ -75,7 +75,6 @@ static void	has_duplicates(t_stack *stack)
 int	main(int argc, char **argv)
 {
 	int		i;
-	int		stack_size;
 	t_stack	*stack;
 	t_stack	*stack_b;
 
@@ -88,11 +87,7 @@ int	main(int argc, char **argv)
 	fill_stack(&stack, argv, &i);
 	has_duplicates(stack);
 	stack_b = NULL;
-	stack_size = get_stack_size(stack);
-	if (stack_size <= 5)
-		simple_sort(&stack, &stack_b);
-	else
-		turk_sort(&stack, &stack_b);
+	simple_sort(&stack, &stack_b);
 	print_stack("Stack A after", stack);
 	print_stack("Stack b after", stack_b);
 	free_stack(&stack);
