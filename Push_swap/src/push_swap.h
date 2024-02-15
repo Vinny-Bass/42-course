@@ -27,9 +27,10 @@ typedef struct s_stack
 
 t_stack		*get_last_node(t_stack *lst);
 t_stack		*create_node(int n);
-void		validate_args(int argc, char **argv);
-void		fill_stack(t_stack **stack, char **argv, int *i);
-void		has_duplicates(t_stack *stack);
+void		init(int argc, char **argv, t_stack **a);
+void		free_stacks(t_stack *a, t_stack *b);
+void		sort_three(t_stack **a, t_stack **b);
+void		sort_two(t_stack **a, t_stack **b);
 void		swap(char command, t_stack **a, t_stack **b);
 void		swap_stack(t_stack **fe, t_stack *se);
 void		push(char command, t_stack **a, t_stack **b);

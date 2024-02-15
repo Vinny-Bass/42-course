@@ -12,6 +12,9 @@
 
 #include "../push_swap.h"
 
+/**
+ * Based on s[0],s[1] and s[size] take the best decision to move until the stack is ordered
+ */
 static void	exec_operations_b(t_stack **a, t_stack **b)
 {
 	t_stack	*last;
@@ -35,6 +38,9 @@ static void	exec_operations_b(t_stack **a, t_stack **b)
 	}
 }
 
+/**
+ * Based on s[0],s[1] and s[size] take the best decision to move until the stack is ordered
+ */
 static void	exec_operations_a(t_stack **a, t_stack **b)
 {
 	t_stack	*last;
@@ -59,6 +65,10 @@ static void	exec_operations_a(t_stack **a, t_stack **b)
 	}
 }
 
+/**
+ * Simple sort comparing all the possible values to be moved so s[0], s[1]
+ * and s[size]
+ */
 void	simple_sort(t_stack **a, t_stack **b)
 {
 	if (!a || !(*a)->next)

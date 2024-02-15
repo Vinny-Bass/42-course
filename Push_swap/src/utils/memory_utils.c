@@ -12,6 +12,9 @@
 
 #include "../push_swap.h"
 
+/**
+ * Iterate and free the stack nodes then the stack itself
+ */
 void	free_stack(t_stack **stack)
 {
 	t_stack	*current;

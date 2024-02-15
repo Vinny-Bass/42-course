@@ -52,3 +52,11 @@ int	is_ordered(t_stack *stack, int primary_stack)
 	}
 	return (1);
 }
+/**
+ * Free both stacks
+ */
+void	free_stacks(t_stack *a, t_stack *b)
+{
+	free_stack(&a);
+	free_stack(&b);
+}

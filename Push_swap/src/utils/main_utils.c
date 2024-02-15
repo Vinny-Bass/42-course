@@ -3,7 +3,7 @@
 /**
  * Validate the number of arguments and if the arguments are numbers.
  */
-void validate_args(int argc, char **argv)
+static void validate_args(int argc, char **argv)
 {
 	int i;
 
@@ -25,7 +25,7 @@ void validate_args(int argc, char **argv)
 /**
  * Insert the command line args into a stack
  */
-void fill_stack(t_stack **stack, char **argv, int *i)
+static void fill_stack(t_stack **stack, char **argv, int *i)
 {
 	t_stack *node;
 
@@ -46,7 +46,7 @@ void fill_stack(t_stack **stack, char **argv, int *i)
 /**
  * Verify if the stack has an duplicate number
  */
-void	has_duplicates(t_stack *stack)
+static void	has_duplicates(t_stack *stack)
 {
 	t_stack	*current;
 	t_stack	*checker;
@@ -67,4 +67,23 @@ void	has_duplicates(t_stack *stack)
 		}
 		current = current->next;
 	}
+}
+
+/**
+ * Validate args and fill the stack
+ */
+void	init(int argc, char **argv, t_stack **a)
+{
+	int		i;
+	t_stack	*new_stack;
+
+	validate_args(argc, argv);
+	i = argc - 1;
+	new_stack = create_node(ft_atoi(argv[i]));
+	if (!new_stack)
+		exit(EXIT_FAILURE);
+	i--;
+	fill_stack(&new_stack, argv, &i);
+	has_duplicates(new_stack);
+	(*a) = new_stack;
 }

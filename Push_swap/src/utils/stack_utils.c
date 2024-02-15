@@ -29,6 +29,9 @@ void	add_node_on_top(t_stack **lst, t_stack *new)
 	*lst = new;
 }
 
+/**
+ * Create and initialize a new node part of the stack
+ */
 t_stack	*create_node(int n)
 {
 	t_stack	*node;
@@ -44,6 +47,9 @@ t_stack	*create_node(int n)
 	return (node);
 }
 
+/**
+ * Return the stack size
+ */
 int	get_stack_size(t_stack *lst)
 {
 	int	counter;

@@ -5,9 +5,11 @@ CFLAGS = -Wall -Wextra -Werror
 SRCS =	src/operations/operations_utils.c \
 		src/operations/operations.c \
 		src/sorting/simple_sort.c \
+		src/sorting/sort_three.c \
+		src/sorting/sort_two.c \
 		src/sorting/complex_sort.c \
 		src/utils/main_utils.c \
-		src/utils/list_utils.c \
+		src/utils/stack_utils.c \
 		src/utils/arr_utils.c \
 		src/utils/memory_utils.c \
 		src/utils/utils.c \

@@ -217,34 +217,6 @@ static void	synergy(t_stack **stack_a, t_stack **stack_b, int pos)
 	move_stack(stack_a, stack_b, pos);
 }
 
-void	sort_three(t_stack **a, t_stack **b)
-{
-	int	one;
-	int	two;
-	int	three;
-
-	one = (*a)->n;
-	two = (*a)->next->n;
-	three = (*a)->next->next->n;
-	if (one < two && two > three && one < three)
-	{
-		rotate('a', a, b, 0);
-		swap('a', a, b);
-		rotate('a', a, b, 1);
-	}
-	else if (one > two && two > three && one > three)
-	{
-		swap('a', a, b);
-		rotate('a', a, b, 1);
-	}
-	else if (one > two && two < three && one < three)
-		swap('a', a, b);
-	else if (one < two && two > three && one > three)
-		rotate('a', a, b, 1);
-	else if (one > two && two < three && one > three)
-		rotate('a', a, b, 0);
-}
-
 static void	order_stacks(t_stack **stack_a, t_stack **stack_b)
 {
 	while ((*stack_b)->n != max(*stack_b))
