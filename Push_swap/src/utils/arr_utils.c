@@ -12,7 +12,7 @@
 
 #include "../push_swap.h"
 
-int	*cpy_lst_to_arr(t_stack *stack, int size)
+int	*cpy_stack_to_arr(t_stack *stack, int size)
 {
 	int	*arr;
 	int	i;

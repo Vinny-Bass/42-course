@@ -23,19 +23,14 @@ void	swap_stack(t_stack **fe, t_stack *se)
 
 void	push_stack(t_stack **from, t_stack **to)
 {
-	t_stack	*to_move;
+	t_stack	*tmp;
 
 	if (!(*from))
 		return ;
-	to_move = *from;
-	*from = to_move->next;
-	if (*from)
-		(*from)->prev = NULL;
-	if (*to)
-		(*to)->prev = to_move;
-	to_move->next = *to;
-	to_move->prev = NULL;
-	*to = to_move;
+	tmp = *to;
+	*to = *from;
+	*from = (*from)->next;
+	(*to)->next = tmp;
 	return ;
 }
 
@@ -46,18 +41,17 @@ void	rotate_stack(t_stack **stack, int reverse)
 
 	if (!reverse) {
 		tmp = *stack;
-		*stack = tmp->next;  // Move the head forward
+		*stack = (*stack)->next;
+		tmp->next = NULL;
 		last = get_last_node(*stack);
-		last->next = tmp;  // Append the old head to the end
-		tmp->next = NULL;  // Isolate the old head
+		last->next = tmp;
 	}
 	else
 	{
-		tmp = *stack;
-		last = get_last_node((*stack));
-		last->next = tmp;
-		*stack = tmp->next;
-		tmp->next = NULL;
+		tmp = get_last_node((*stack));
+		get(*stack, get_stack_size(*stack) - 2)->next = NULL;
+		tmp->next = *stack;
+		*stack = tmp; 
 	}
 	return ;
 }

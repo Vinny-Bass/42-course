@@ -45,6 +45,7 @@ static void	exec_operations_a(t_stack **a, t_stack **b)
 		if ((*a)->n > (*a)->next->n)
 		{
 			swap('a', a, b);
+			last = get_last_node(*a);
 			continue ;
 		}
 		if (last->n < (*a)->n)
@@ -54,10 +55,7 @@ static void	exec_operations_a(t_stack **a, t_stack **b)
 			continue ;
 		}
 		if ((*a)->n < (*a)->next->n)
-		{
 			push('b', a, b);
-			exec_operations_b(a, b);
-		}
 	}
 }
 

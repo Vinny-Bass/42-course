@@ -26,7 +26,6 @@ t_stack	*get_last_node(t_stack *lst)
 void	add_node_on_top(t_stack **lst, t_stack *new)
 {
 	new->next = *lst;
-	(*lst)->prev = new;
 	*lst = new;
 }
 
@@ -38,8 +37,10 @@ t_stack	*create_node(int n)
 	if (node == NULL)
 		return (NULL);
 	node->n = n;
+	node->steps_a = 0;
+	node->steps_b = 0;
+	node->total = 0;
 	node->next = NULL;
-	node->prev = NULL;
 	return (node);
 }
 

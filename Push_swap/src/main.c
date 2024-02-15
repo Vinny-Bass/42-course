@@ -87,9 +87,9 @@ int	main(int argc, char **argv)
 	fill_stack(&stack, argv, &i);
 	has_duplicates(stack);
 	stack_b = NULL;
-	simple_sort(&stack, &stack_b);
-	print_stack("Stack A after", stack);
-	print_stack("Stack b after", stack_b);
+	complex_sort(&stack, &stack_b);
+	// print_stack("Stack A after", stack);
+	// print_stack("Stack b after", stack_b);
 	free_stack(&stack);
 	free_stack(&stack_b);
 	return (0);
