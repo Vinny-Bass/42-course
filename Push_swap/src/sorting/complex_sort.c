@@ -1,113 +1,15 @@
 #include "../push_swap.h"
 
 /**
- * Counts the necessary steps to get each values in `stack_a` to the top of the
- * stack. Negative values mean it should be moved with `rra` to save moves.
+ * Execute steps in the stacks as `steps_a` and `steps_b` values of the specified element
+ * in `stack_a`.
 */
-void	count_steps_a(t_stack *stack_a)
-{
-	int	len;
-	int	str_len;
-
-	str_len = get_stack_size(stack_a);
-	len = 0;
-	while (stack_a != NULL)
-	{
-		if (len <= (str_len / 2))
-			stack_a->steps_a = len;
-		else
-			stack_a->steps_a = len - str_len;
-		stack_a = stack_a->next;
-		len++;
-	}
-}
-
-t_stack	*get(t_stack *stack, int pos)
-{
-	int		i;
-	t_stack	*node;
-
-	node = stack;
-	i = 0;
-	while (i < pos)
-	{
-		i++;
-		node = node->next;
-	}
-	return (node);
-}
-
-int	min_steps(t_stack **stack_a)
-{
-	int		pos;
-	int		min_steps;
-	int		abs_value;
-	int		i;
-
-	i = 0;
-	min_steps = 214748367;
-	while (i < get_stack_size(*stack_a))
-	{
-		abs_value = get(*stack_a, i)->total;
-		if (abs_value < min_steps)
-		{
-			min_steps = abs_value;
-			pos = i;
-		}
-		i++;
-	}
-	return (pos);
-}
-
-int	max(t_stack *stack)
-{
-	int	max;
-
-	if (!stack)
-		return (0);
-	max = stack->n;
-	while (stack != NULL)
-	{
-		if (stack->n > max)
-			max = stack->n;
-		stack = stack->next;
-	}
-	return (max);
-}
-
-int	min(t_stack *stack)
-{
-	int	min;
-
-	min = stack->n;
-	while (stack != NULL)
-	{
-		if (stack->n < min)
-			min = stack->n;
-		stack = stack->next;
-	}
-	return (min);
-}
-
-int	get_pos(t_stack *stack, int value)
-{
-	int	pos;
-
-	pos = 0;
-	while (stack->n != value)
-	{
-		stack = stack->next;
-		pos++;
-	}
-	return (pos);
-}
-
-static void	move_stack(t_stack **stack_a, t_stack **stack_b, int pos)
+static void	execute_steps(t_stack **stack_a, t_stack **stack_b, int pos)
 {
 	int		i;
 
 	i = 0;
-	while (abs(get(*stack_a, pos)->steps_a) > i)
+	while (ft_abs(get(*stack_a, pos)->steps_a) > i)
 	{
 		if (get(*stack_a, pos)->steps_a > 0)
 			rotate('a', stack_a, stack_b, 0);
@@ -117,7 +19,7 @@ static void	move_stack(t_stack **stack_a, t_stack **stack_b, int pos)
 		i++;
 	}
 	i = 0;
-	while (abs(get(*stack_a, pos)->steps_b) > i)
+	while (ft_abs(get(*stack_a, pos)->steps_b) > i)
 	{
 		if (get(*stack_a, pos)->steps_b > 0)
 			rotate('b', stack_a, stack_b, 0);
@@ -126,70 +28,12 @@ static void	move_stack(t_stack **stack_a, t_stack **stack_b, int pos)
 		i++;
 	}
 }
-
-static int	get_target(t_stack *stack_a, t_stack *stack_b, int s_b_size)
-{
-	int		target;
-	t_stack	*stack_b_cpy;
-	int		lst_value;
-
-	stack_b_cpy = stack_b;
-	if (stack_a->n < min(stack_b) || stack_a->n > max(stack_b))
-			target = max(stack_b);
-	else
-	{
-		lst_value = get(stack_b, s_b_size - 1)->n;
-		while (stack_b_cpy->next != NULL)
-		{
-			if (stack_a->n < stack_b_cpy->n
-				&& stack_a->n > stack_b_cpy->next->n)
-				target = stack_b_cpy->next->n;
-			else if (stack_a->n
-				< lst_value
-				&& stack_a->n > stack_b->n)
-				target = stack_b->n;
-			stack_b_cpy = stack_b_cpy->next;
-		}
-	}
-	return (target);
-}
-
-void	count_steps_b(t_stack *stack_a, t_stack *stack_b)
-{
-	int	target;
-	int	s_b_size;
-
-	s_b_size = get_stack_size(stack_b);
-	while (stack_a != NULL)
-	{
-		target = get_target(stack_a, stack_b, s_b_size);
-		if (get_pos(stack_b, target) <= s_b_size / 2)
-			stack_a->steps_b = get_pos(stack_b, target);
-		else
-			stack_a->steps_b = -(s_b_size \
-			- get_pos(stack_b, target));
-		stack_a = stack_a->next;
-	}
-}
-
-void	totalize(t_stack *stack_a)
-{
-	while (stack_a != NULL)
-	{
-		if ((stack_a->steps_a * stack_a->steps_b) < 0)
-			stack_a->total = abs(stack_a->steps_a) + abs(stack_a->steps_b);
-		else
-		{
-			if (abs(stack_a->steps_a) > abs(stack_a->steps_b))
-				stack_a->total = abs(stack_a->steps_a);
-			else
-				stack_a->total = abs(stack_a->steps_b);
-		}
-		stack_a = stack_a->next;
-	}
-}
-
-static void	synergy(t_stack **stack_a, t_stack **stack_b, int pos)
+/**
+ * Improve the steps verifying if steps for stack_a and stack_b have the same symbol
+ * witch means we can use `rr` or `rrr` to move both stacks at the same
+ * time to save moves.
+*/
+static void	optimize(t_stack **stack_a, t_stack **stack_b, int pos)
 {
 	t_stack	*value;
 
@@ -211,12 +55,16 @@ static void	synergy(t_stack **stack_a, t_stack **stack_b, int pos)
 				value->steps_b++;
 			}
 		}
-		totalize(*stack_a);
+		set_total_steps(*stack_a);
 		pos = min_steps(stack_a);
 	}
-	move_stack(stack_a, stack_b, pos);
+	execute_steps(stack_a, stack_b, pos);
 }
 
+/**
+ * To prepare for the final sorting phase, we ensure the largest value in `stack_b`
+ * is at the top, then use `sort_three` function to order the top three items in `stack_a`.
+ */
 static void	order_stacks(t_stack **stack_a, t_stack **stack_b)
 {
 	while ((*stack_b)->n != max(*stack_b))
@@ -228,8 +76,12 @@ static void	order_stacks(t_stack **stack_a, t_stack **stack_b)
 	}
 	sort_three(stack_a, stack_b);
 }
-
-static void	zipper(t_stack **stack_a, t_stack **stack_b)
+/**
+ * The `merge_stacks` function integrates elements from `stack_b` into `stack_a`, ensuring correct
+ * ordering. It first aligns the top elements of `stack_a` by rotating if necessary,
+ * then sequentially moves all elements from `stack_b` to `stack_a`.
+ */
+static void	merge_stacks(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stack	*s_a_cpy;
 	int		i;
@@ -249,23 +101,30 @@ static void	zipper(t_stack **stack_a, t_stack **stack_b)
 	while (get_stack_size(*stack_b))
 	{
 		push('a', stack_a, stack_b);
-	}
-		
+	}	
 }
 
+/**
+ * Initially, this function moves the first two numbers to `stack_b` for comparison.
+ * It then calculates the minimum moves required for each element in `stack_a` to be optimally positioned in `stack_b`,
+ * considering steps in both stacks. After distributing all but three elements to stack_b, 
+ * it organizes the remaining trio in `stack_a` and employs the `merge_stacks` method for final alignment.
+*/
 void complex_sort(t_stack **a, t_stack **b)
 {
+	int	pos;
+
     push('b', a, b);
     push('b', a, b);
     while (get_stack_size(*a) > 3)
     {
         count_steps_a(*a);
         count_steps_b(*a, *b);
-		totalize(*a);
-		int pos = min_steps(a);
-		synergy(a, b, pos);
+		set_total_steps(*a);
+		pos = min_steps(a);
+		optimize(a, b, pos);
 		push('b', a, b);
     }
 	order_stacks(a, b);
-	zipper(a, b);
+	merge_stacks(a, b);
 }

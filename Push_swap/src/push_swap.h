@@ -27,6 +27,7 @@ typedef struct s_stack
 
 t_stack		*get_last_node(t_stack *lst);
 t_stack		*create_node(int n);
+t_stack		*get(t_stack *stack, int pos);
 void		init(int argc, char **argv, t_stack **a);
 void		free_stacks(t_stack *a, t_stack *b);
 void		sort_three(t_stack **a, t_stack **b);
@@ -39,15 +40,17 @@ void		rotate(char command, t_stack **a, t_stack **b, int inverse);
 void		rotate_stack(t_stack **stack, int reverse);
 void		add_node_on_top(t_stack **lst, t_stack *n);
 void		simple_sort(t_stack **a, t_stack **b);
-void		trigger_error(t_stack *stack, char *error);
 void		print_stack(const char *label, t_stack *stack);
 void		free_stack(t_stack **stack);
-int			*cpy_stack_to_arr(t_stack *stack, int size);
-int			*cpy_arr(int *arr, int size);
+void		complex_sort(t_stack **a, t_stack **b);
+void		count_steps_a(t_stack *stack_a);
+void		count_steps_b(t_stack *stack_a, t_stack *stack_b);
+void		set_total_steps(t_stack *stack_a);
 int			ft_isnumber(char *str);
 int			get_stack_size(t_stack *lst);
 int			is_ordered(t_stack *stack, int primary_stack);
-void complex_sort(t_stack **a, t_stack **b);
-t_stack	*get(t_stack *stack, int pos);
+int			max(t_stack *stack);
+int			min(t_stack *stack);
+int			min_steps(t_stack **stack_a);
 
 #endif

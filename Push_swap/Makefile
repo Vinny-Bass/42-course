@@ -10,10 +10,10 @@ SRCS =	src/operations/operations_utils.c \
 		src/sorting/complex_sort.c \
 		src/utils/main_utils.c \
 		src/utils/stack_utils.c \
-		src/utils/arr_utils.c \
+		src/utils/stack_utils_2.c \
+		src/utils/step_counters.c \
 		src/utils/memory_utils.c \
 		src/utils/utils.c \
-		src/errors/errors.c \
 		src/main.c
 OBJS = $(SRCS:.c=.o)
 
