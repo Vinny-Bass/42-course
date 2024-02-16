@@ -3,7 +3,7 @@
 /**
  * Validate the number of arguments and if the arguments are numbers.
  */
-static void validate_args(int argc, char **argv)
+void validate_args(int argc, char **argv)
 {
 	int i;
 

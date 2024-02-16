@@ -15,6 +15,7 @@
 
 # include "../libs/libft/libft.h"
 # include "../libs/ft_printf/ft_printf.h"
+# include "../libs/get_next_line/get_next_line.h"
 
 typedef struct s_stack
 {
@@ -28,6 +29,7 @@ typedef struct s_stack
 t_stack		*get_last_node(t_stack *lst);
 t_stack		*create_node(int n);
 t_stack		*get(t_stack *stack, int pos);
+void		sort(int argc, char **argv, t_stack *a, t_stack *b);
 void		init(int argc, char **argv, t_stack **a);
 void		free_stacks(t_stack *a, t_stack *b);
 void		sort_three(t_stack **a, t_stack **b);
@@ -46,6 +48,7 @@ void		complex_sort(t_stack **a, t_stack **b);
 void		count_steps_a(t_stack *stack_a);
 void		count_steps_b(t_stack *stack_a, t_stack *stack_b);
 void		set_total_steps(t_stack *stack_a);
+void		validate_args(int argc, char **argv);
 int			ft_isnumber(char *str);
 int			get_stack_size(t_stack *lst);
 int			is_ordered(t_stack *stack, int primary_stack);
