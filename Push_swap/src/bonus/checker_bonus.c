@@ -46,7 +46,7 @@ int	main(int argc, char **argv)
 	while (1)
 	{
 		step = get_next_line(0);
-		if (!step || step[0] == '\n')
+		if (!step)
 			break ;
 		exec_step(&stack, &stack_b, step);
 		free(step);

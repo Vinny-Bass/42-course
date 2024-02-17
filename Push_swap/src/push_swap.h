@@ -55,5 +55,6 @@ int			is_ordered(t_stack *stack, int primary_stack);
 int			max(t_stack *stack);
 int			min(t_stack *stack);
 int			min_steps(t_stack **stack_a);
+int			count_argc(char **argv);
 
 #endif

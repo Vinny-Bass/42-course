@@ -65,3 +65,13 @@ void	free_stacks(t_stack *a, t_stack *b)
 	free_stack(&a);
 	free_stack(&b);
 }
+
+int count_argc(char **argv)
+{
+	int	i;
+
+	i = 1;
+	while (argv[i])
+		i++;
+	return (i);
+}

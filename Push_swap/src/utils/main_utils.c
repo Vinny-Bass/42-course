@@ -91,7 +91,14 @@ void	init(int argc, char **argv, t_stack **a)
 {
 	int		i;
 	t_stack	*new_stack;
-
+	char	**numbers;
+	
+	if (argc == 2)
+	{
+		numbers = ft_split(argv[1], ' ');
+		argv = numbers;
+		argc = count_argc(argv);
+	}
 	validate_args(argc, argv);
 	i = argc - 1;
 	new_stack = create_node(ft_atoi(argv[i]));
@@ -101,4 +108,5 @@ void	init(int argc, char **argv, t_stack **a)
 	fill_stack(&new_stack, argv, &i);
 	has_duplicates(new_stack);
 	(*a) = new_stack;
+	free(numbers);
 }

@@ -5,7 +5,6 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRCS =	src/operations/operations_utils.c \
 		src/operations/operations.c \
-		src/sorting/main.c \
 		src/sorting/simple_sort.c \
 		src/sorting/sort_three.c \
 		src/sorting/sort_two.c \
@@ -21,7 +20,6 @@ OBJS = $(SRCS:.c=.o)
 
 SRCS_BONUS = 	src/bonus/operations_utils_bonus.c \
 				src/bonus/operations_bonus.c \
-				src/sorting/main.c \
 				src/sorting/simple_sort.c \
 				src/sorting/sort_three.c \
 				src/sorting/sort_two.c \

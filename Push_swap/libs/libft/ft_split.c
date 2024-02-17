@@ -37,7 +37,7 @@ static int	word_count(const char *s, char c)
 
 static void	init_controllers(int *word_index, int *start, int *end)
 {
-	*word_index = 0;
+	*word_index = 1;
 	*start = 0;
 	*end = 0;
 }
@@ -80,9 +80,10 @@ char	**ft_split(const char *s, char c)
 	init_controllers(&word_index, &start, &end);
 	if (!s || words == 0)
 		return (handle_zero_words());
-	result = malloc((words + 1) * sizeof(char *));
+	result = malloc((words + 2) * sizeof(char *));
 	if (!result)
 		return (NULL);
+	result[0] = (NULL);
 	while (s[end])
 	{
 		if (s[end] != c && (end == 0 || s[end - 1] == c))
@@ -93,6 +94,6 @@ char	**ft_split(const char *s, char c)
 	}
 	if (s[end - 1] != c)
 		result[word_index++] = ft_strndup(s + start, end - start);
-	result[words] = (NULL);
+	result[words + 1] = (NULL);
 	return (result);
 }
