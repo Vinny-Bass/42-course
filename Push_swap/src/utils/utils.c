@@ -19,6 +19,11 @@ int	ft_isnumber(char *str)
 	i = 0;
 	while (str[i])
 	{
+		if (str[i] == '-' && ft_isdigit(str[i + 1]))
+		{
+			i++;
+			continue ;
+		}
 		if (!ft_isdigit(str[i]))
 			return (0);
 		i++;

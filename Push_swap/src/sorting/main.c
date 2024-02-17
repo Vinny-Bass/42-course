@@ -6,7 +6,7 @@ void	sort(int argc, char **argv, t_stack *a, t_stack *b)
 
 	init(argc, argv, &a);
 	stack_size = get_stack_size(a);
-	if (stack_size == 1)
+	if (stack_size == 1 || is_ordered(a, 1))
 	{
 		free_stacks(a, b);
 		exit(EXIT_SUCCESS);
@@ -19,4 +19,5 @@ void	sort(int argc, char **argv, t_stack *a, t_stack *b)
 		simple_sort(&a, &b);
 	else
 		complex_sort(&a, &b);
+	free_stacks(a, b);
 }

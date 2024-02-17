@@ -1,5 +1,19 @@
 #include "../push_swap.h"
 
+static void	validate_overlap(char *str)
+{
+	if (ft_strncmp(str, "2147483647", 10) && ft_atoi(str) == INT_MAX)
+	{
+		ft_printf("Error\nOverflow arg: %s\n", str);
+		exit(EXIT_FAILURE);
+	}
+	if (ft_strncmp(str, "-2147483647", 11) && ft_atoi(str) == INT_MIN)
+	{
+		ft_printf("Error\nUnderflow arg: %s\n", str);
+		exit(EXIT_FAILURE);
+	}
+}
+
 /**
  * Validate the number of arguments and if the arguments are numbers.
  */
@@ -17,9 +31,10 @@ void validate_args(int argc, char **argv)
 			ft_printf("Error\nInvalid arg: %s\n", argv[i]);
 			exit(EXIT_FAILURE);
 		}
+		validate_overlap(argv[i]);
 		i++;
 	}
-	return;
+	return ;
 }
 
 /**
@@ -59,7 +74,7 @@ static void	has_duplicates(t_stack *stack)
 		{
 			if (current->n == checker->n)
 			{
-				ft_printf("Error\nDuplicate Number: %d", checker->n);
+				ft_printf("Error\nDuplicate Number: %d\n", checker->n);
 				free_stack(&stack);
 				exit(EXIT_FAILURE);
 			}
