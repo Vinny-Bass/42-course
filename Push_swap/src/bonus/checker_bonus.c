@@ -1,4 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker_bonus.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vsouza-v <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/20 20:45:03 by vsouza-v          #+#    #+#             */
+/*   Updated: 2024/02/20 20:45:06 by vsouza-v         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
+
+static void	fail_step(t_stack **a, t_stack **b, char *step)
+{
+	ft_printf("\033[0;31mError\n\033[0m");
+	free_stacks(*a, *b);
+	free(step);
+	exit(EXIT_FAILURE);
+}
 
 static void	exec_step(t_stack **a, t_stack **b, char *step)
 {
@@ -25,9 +45,16 @@ static void	exec_step(t_stack **a, t_stack **b, char *step)
 	else if (ft_strncmp(step, "rrr\n", 3) == 0)
 		rotate('r', a, b, 0);
 	else
-		(ft_printf("\033[0;31mError\n\033[0m"), exit(-1));
+		fail_step(a, b, step);
 }
 
+static void	print_result(t_stack *stack, t_stack *stack_b)
+{
+	if (is_ordered(stack, 1) && get_stack_size(stack_b) == 0)
+		ft_printf("\033[0;32mOK\033[0m\n");
+	else
+		ft_printf("\033[0;31mKO\033[0m\n");
+}
 
 int	main(int argc, char **argv)
 {
@@ -41,6 +68,7 @@ int	main(int argc, char **argv)
 	if (get_stack_size(stack) == 1)
 	{
 		ft_printf("\033[0;32mOK\033[0m\n");
+		free_stacks(stack, stack_b);
 		exit(EXIT_SUCCESS);
 	}
 	while (1)
@@ -52,10 +80,7 @@ int	main(int argc, char **argv)
 		free(step);
 	}
 	free(step);
-	if (is_ordered(stack, 1) && get_stack_size(stack_b) == 0)
-		ft_printf("\033[0;32mOK\033[0m\n");
-	else
-		ft_printf("\033[0;31mKO\033[0m\n");
+	print_result(stack, stack_b);
 	free_stacks(stack, stack_b);
 	return (0);
 }

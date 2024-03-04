@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 	int		stack_size;
 	t_stack	*stack;
 	t_stack	*stack_b;
-	
+
 	stack = NULL;
 	stack_b = NULL;
 	init(argc, argv, &stack);

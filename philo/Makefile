@@ -1,8 +1,13 @@
 NAME = philosophers
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = 
 
-SRCS =	src/arguments.c
+SRCS =	src/arguments.c \
+		src/main.c \
+		src/initialize.c \
+		src/thread_handler.c \
+		src/time_handler.c \
+		src/print_colors.c
 OBJS = $(SRCS:.c=.o)
 
 LIBFT = ./libs/libft

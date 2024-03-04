@@ -48,7 +48,7 @@ void		complex_sort(t_stack **a, t_stack **b);
 void		count_steps_a(t_stack *stack_a);
 void		count_steps_b(t_stack *stack_a, t_stack *stack_b);
 void		set_total_steps(t_stack *stack_a);
-void		validate_args(int argc, char **argv);
+void		free_numbers(char **numbers, int success);
 int			ft_isnumber(char *str);
 int			get_stack_size(t_stack *lst);
 int			is_ordered(t_stack *stack, int primary_stack);

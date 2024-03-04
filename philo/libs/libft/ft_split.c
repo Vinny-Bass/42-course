@@ -12,88 +12,50 @@
 
 #include "libft.h"
 
-static int	word_count(const char *s, char c)
+static size_t	ft_countword(char const *s, char c)
 {
-	int	count;
-	int	in_word;
+	size_t	count;
 
+	if (!*s)
+		return (0);
 	count = 0;
-	in_word = 0;
 	while (*s)
 	{
-		if (*s != c && in_word == 0)
-		{
-			in_word = 1;
+		while (*s == c)
+			s++;
+		if (*s)
 			count++;
-		}
-		else if (*s == c)
-		{
-			in_word = 0;
-		}
-		s++;
+		while (*s != c && *s)
+			s++;
 	}
 	return (count);
 }
 
-static void	init_controllers(int *word_index, int *start, int *end)
+char	**ft_split(char const *s, char c)
 {
-	*word_index = 1;
-	*start = 0;
-	*end = 0;
-}
+	char	**lst;
+	size_t	word_len;
+	int		i;
 
-static char	*ft_strndup(const char *s, size_t n)
-{
-	size_t	len;
-	char	*new_str;
-
-	len = ft_strlen(s);
-	if (len > n)
-		len = n;
-	new_str = malloc((len + 1) * sizeof(char));
-	if (new_str == NULL)
-		return (NULL);
-	ft_strlcpy(new_str, s, (len + 1) * sizeof(char));
-	return (new_str);
-}
-
-static char	**handle_zero_words(void)
-{
-	char	**result;
-
-	result = malloc(sizeof(char *));
-	if (!result)
-		return (NULL);
-	result[0] = NULL;
-	return (result);
-}
-
-char	**ft_split(const char *s, char c)
-{
-	int		words;
-	char	**result;
-	int		word_index;
-	int		start;
-	int		end;
-
-	words = word_count(s, c);
-	init_controllers(&word_index, &start, &end);
-	if (!s || words == 0)
-		return (handle_zero_words());
-	result = malloc((words + 2) * sizeof(char *));
-	if (!result)
-		return (NULL);
-	result[0] = (NULL);
-	while (s[end])
+	lst = (char **)malloc((ft_countword(s, c) + 2) * sizeof(char *));
+	if (!s || !lst)
+		return (0);
+	lst[0] = NULL;
+	i = 1;
+	while (*s)
 	{
-		if (s[end] != c && (end == 0 || s[end - 1] == c))
-			start = end;
-		if (s[end] == c && (end > 0 && s[end - 1] != c))
-			result[word_index++] = ft_strndup(s + start, end - start);
-		end++;
+		while (*s == c && *s)
+			s++;
+		if (*s)
+		{
+			if (!ft_strchr(s, c))
+				word_len = ft_strlen(s);
+			else
+				word_len = ft_strchr(s, c) - s;
+			lst[i++] = ft_substr(s, 0, word_len);
+			s += word_len;
+		}
 	}
-	if (s[end - 1] != c)
-		result[word_index++] = ft_strndup(s + start, end - start);
-	result[words + 1] = (NULL);
-	return (result);
+	lst[i] = NULL;
+	return (lst);
 }

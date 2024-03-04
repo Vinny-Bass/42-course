@@ -39,7 +39,8 @@ void	rotate_stack(t_stack **stack, int reverse)
 	t_stack	*last;
 	t_stack	*tmp;
 
-	if (!reverse) {
+	if (!reverse)
+	{
 		tmp = *stack;
 		*stack = (*stack)->next;
 		tmp->next = NULL;
@@ -51,7 +52,7 @@ void	rotate_stack(t_stack **stack, int reverse)
 		tmp = get_last_node((*stack));
 		get(*stack, get_stack_size(*stack) - 2)->next = NULL;
 		tmp->next = *stack;
-		*stack = tmp; 
+		*stack = tmp;
 	}
 	return ;
 }

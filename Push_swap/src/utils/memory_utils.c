@@ -29,3 +29,22 @@ void	free_stack(t_stack **stack)
 	}
 	*stack = NULL;
 }
+
+void	free_numbers(char **numbers, int success)
+{
+	int	i;
+
+	if (!numbers && !success)
+		return ;
+	if (!numbers && success)
+		exit(success);
+	i = 1;
+	while (numbers[i])
+	{
+		free(numbers[i]);
+		i++;
+	}
+	free(numbers);
+	if (success)
+		exit(success);
+}

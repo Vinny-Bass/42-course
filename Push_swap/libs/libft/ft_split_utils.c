@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.c                                           :+:      :+:    :+:   */
+/*   ft_split_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsouza-v <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/20 20:34:04 by vsouza-v          #+#    #+#             */
-/*   Updated: 2024/02/20 20:34:06 by vsouza-v         ###   ########.fr       */
+/*   Created: 2024/02/20 20:32:12 by vsouza-v          #+#    #+#             */
+/*   Updated: 2024/02/20 20:32:14 by vsouza-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_abs(int n)
+char	**create_result(int words)
 {
-	if (n < 0)
-		return (-n);
-	return (n);
+	char	**result;
+
+	result = malloc((words + 2) * sizeof(char *));
+	if (!result)
+		return (NULL);
+	result[0] = (NULL);
+	return (result);
 }

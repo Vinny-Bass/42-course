@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   step_counters.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vsouza-v <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/20 20:47:15 by vsouza-v          #+#    #+#             */
+/*   Updated: 2024/02/20 20:47:16 by vsouza-v         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
 /**
@@ -21,6 +33,7 @@ void	count_steps_a(t_stack *stack_a)
 		len++;
 	}
 }
+
 /**
  * To count the steps for `stack_b` we need to know what value we want to reach.
  * So we determine the target where the value should be positioned.
@@ -33,7 +46,7 @@ static int	get_target(t_stack *stack_a, t_stack *stack_b, int s_b_size)
 
 	stack_b_cpy = stack_b;
 	if (stack_a->n < min(stack_b) || stack_a->n > max(stack_b))
-			target = max(stack_b);
+		target = max(stack_b);
 	else
 	{
 		lst_value = get(stack_b, s_b_size - 1)->n;
@@ -69,9 +82,9 @@ static int	get_pos(t_stack *stack, int value)
 }
 
 /**
- * Knowing the target we count how many steps we need to move this target to `stack_b`.
- * That value is saved in `steps_b` of the value in `stack_a` that we are
- * looking at.
+ * Knowing the target we count how many steps we need 
+ * to move this target to `stack_b`. That value is saved 
+ * in `steps_b` of the value in `stack_a` that we are looking at.
 */
 void	count_steps_b(t_stack *stack_a, t_stack *stack_b)
 {

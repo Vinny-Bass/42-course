@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_utils_2.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vsouza-v <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/20 20:46:12 by vsouza-v          #+#    #+#             */
+/*   Updated: 2024/02/20 20:46:13 by vsouza-v         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
 /**
@@ -18,6 +30,7 @@ int	max(t_stack *stack)
 	}
 	return (max);
 }
+
 /**
  * Get the min number of the stack
  */
@@ -68,7 +81,8 @@ void	set_total_steps(t_stack *stack_a)
 	while (stack_a != NULL)
 	{
 		if ((stack_a->steps_a * stack_a->steps_b) < 0)
-			stack_a->total = ft_abs(stack_a->steps_a) + ft_abs(stack_a->steps_b);
+			stack_a->total = ft_abs(stack_a->steps_a) \
+			+ ft_abs(stack_a->steps_b);
 		else
 		{
 			if (ft_abs(stack_a->steps_a) > ft_abs(stack_a->steps_b))

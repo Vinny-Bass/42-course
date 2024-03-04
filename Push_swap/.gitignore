@@ -1,2 +1,7 @@
 push_swap_visualizer
+*.a
+*.o
+src/**/*.a
+src/**/*.o
 push_swap
+imgui.ini
