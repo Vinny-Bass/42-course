@@ -1,5 +1,59 @@
 #include "philo.h"
 
+static void	create_threads(
+	pthread_t *threads, pthread_t *death_threads, \
+	t_philo *philos, int n
+)
+{
+	int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		pthread_create(&threads[i], NULL, dinning_handler, &philos[i]);
+		pthread_create(&death_threads[i], NULL, death_monitor, &philos[i]);
+		i++;
+	}
+	return ;
+}
+
+static void	join_threads(pthread_t *threads, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		pthread_join(threads[i], NULL);
+		i++;
+	}
+	return ;
+}
+
+static void	destroy_mutexes(pthread_mutex_t *forks, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		pthread_mutex_destroy(&forks[i]);
+		i++;
+	}
+	return ;
+}
+
+static void	free_resources(
+	pthread_t *threads, pthread_t *death_threads, \
+	pthread_mutex_t *forks, t_philo *philos
+)
+{
+	free(philos);
+	free(forks);
+	free(threads);
+	free(death_threads);
+}
+
 int main(int argc, char **argv)
 {
 	pthread_mutex_t	*forks;
@@ -19,29 +73,10 @@ int main(int argc, char **argv)
     if(!init_philos(&philos, &forks, argv, max_eats))
         exit(EXIT_FAILURE);
     if(!init_threads(&threads, &death_threads, ft_atoi(argv[1])))
-    {
-        free(philos);
-        free(forks);
-        exit(EXIT_FAILURE);
-    }
-
-    for (int i = 0; i < ft_atoi(argv[1]); i++) {
-        pthread_create(&threads[i], NULL, dinning_handler, &philos[i]);
-		pthread_create(&death_threads[i], NULL, death_monitor, &philos[i]);
-    }
-
-    for (int i = 0; i < ft_atoi(argv[1]); i++) {
-        pthread_join(threads[i], NULL);
-    }
-
-    for (int i = 0; i < ft_atoi(argv[1]); i++) {
-        pthread_mutex_destroy(&forks[i]);
-    }
-
-    free(philos);
-    free(forks);
-    free(threads);
-    free(death_threads);
-
-    return 0;
+		exit_gracefully(philos, forks);
+	create_threads(threads, death_threads, philos, ft_atoi(argv[1]));
+	join_threads(threads, ft_atoi(argv[1]));
+	destroy_mutexes(forks, ft_atoi(argv[1]));
+	free_resources(threads, death_threads, forks, philos);
+    return (0);
 }

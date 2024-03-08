@@ -2,12 +2,11 @@
 # define PHILO_H
 
 # include <stdio.h>
+# include <stdlib.h>
 # include <pthread.h>
 # include <unistd.h>
 # include <sys/time.h>
-
-# include "../libs/libft/libft.h"
-# include "../libs/ft_printf/ft_printf.h"
+# include <limits.h>
 
 typedef struct s_philo {
 	int				id;
@@ -29,8 +28,10 @@ long	get_elapsed_time(struct timeval *start);
 long	get_ts_in_ms();
 void	*dinning_handler(void *arg);
 void	*death_monitor(void *arg);
-void	print_red(char **msg, int id, long time);
-void	print_blue(char **msg, int id, long time);
-void	print_green(char **msg, int id, long time);
+void	print_red(char *msg, int id, long time);
+void	print_blue(char *msg, int id, long time);
+void	print_green(char *msg, int id, long time);
+int     ft_atoi(const char *str);
+void	exit_gracefully(t_philo *philos, pthread_mutex_t *forks);
 
 #endif

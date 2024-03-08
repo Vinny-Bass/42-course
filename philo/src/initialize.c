@@ -48,13 +48,13 @@ int	init_philos(
 	(*philos) = malloc(sizeof(t_philo) * n_philosophers);
 	if (!(*philos))
 	{
-		ft_printf("\033[0;31mError trying to create philosophers\033[0m");
+		printf("\033[0;31mError trying to create philosophers\033[0m");
 		return (0);
 	}
 	(*forks) = malloc(sizeof(pthread_mutex_t) * n_philosophers);
 	if (!(*forks))
 	{
-		ft_printf("\033[0;31mError trying to create forks\033[0m");
+		printf("\033[0;31mError trying to create forks\033[0m");
 		return (0);
 	}
 	fill_philos(argv, forks, philos, max_eats);
@@ -69,13 +69,13 @@ int	init_threads(
 	(*threads) = malloc(sizeof(pthread_t) * n_philosophers);
 	if (!(*threads))
 	{
-		ft_printf("\033[0;31mError trying to create threads\033[0m");
+		printf("\033[0;31mError trying to create threads\033[0m");
 		return (0);
 	}
 	(*death_threads) = malloc(sizeof(pthread_t) * n_philosophers);
 	if (!(*death_threads))
 	{
-		ft_printf("\033[0;31mError trying to create death threads\033[0m");
+		printf("\033[0;31mError trying to create death threads\033[0m");
 		return (0);
 	}
 	return (1);
