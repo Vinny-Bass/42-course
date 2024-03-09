@@ -21,7 +21,7 @@ typedef struct s_philo {
 	pthread_cond_t	*condition;
 } t_philo;
 
-void    validate_args(int argc);
+void    validate_args(int argc, char **argv);
 int		init_philos(t_philo **philos, pthread_mutex_t **forks, char **argv, int max_eats);
 int		init_threads(pthread_t **threads, pthread_t **death_threads, int n_philosophers);
 long	get_elapsed_time(struct timeval *start);

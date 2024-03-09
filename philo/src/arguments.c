@@ -51,8 +51,6 @@ int	is_digit_valid(int argc, char **argv)
 
 void    validate_args(int argc, char **argv)
 {
-	int i;
-
 	if (argc != 5 && argc != 6)
 	{
 		printf("Invalid args, usage: <n_of_p> <t_to_die> <t_to_eat> <t_to_sleep> [n_p_should_eat]");

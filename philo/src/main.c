@@ -62,7 +62,7 @@ int main(int argc, char **argv)
 	t_philo			*philos;
 	int				max_eats;
 
-	validate_args(argc);
+	validate_args(argc, argv);
 	max_eats = -1;
 	if (argc > 5)
 		max_eats = ft_atoi(argv[5]);
