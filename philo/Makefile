@@ -1,14 +1,21 @@
-NAME = philosophers
+NAME = philo
 CC = cc
 CFLAGS = -Werror -Wall -Wextra
 
 SRCS =	src/arguments.c \
-		src/main.c \
+		src/dinner_actions.c \
+		src/dinner.c \
+		src/errors.c \
+		src/ft_atoi.c \
 		src/initialize.c \
+		src/main.c \
+		src/memory_handler.c \
+		src/mutex_handler.c \
+		src/mutex_utils.c \
+		src/print_handler.c \
+		src/sync_handler.c \
 		src/thread_handler.c \
 		src/time_handler.c \
-		src/print_colors.c \
-		src/ft_atoi.c \
 		src/utils.c
 OBJS = $(SRCS:.c=.o)
 

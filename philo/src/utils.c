@@ -1,8 +1,22 @@
 #include "philo.h"
 
-void	exit_gracefully(t_philo *philos, pthread_mutex_t *forks)
+void	ft_usleep(long usec, t_state *state)
 {
-	free(philos);
-	free(forks);
-	exit(EXIT_FAILURE);
+	long	start;
+	long	elapsed;
+	long	rem;
+
+	start = get_time(MICROSECOND);
+	while(get_time(MICROSECOND) - start < usec)
+	{
+		if (simulation_finished(state))
+			break;
+		elapsed = get_time(MICROSECOND) - start;
+		rem = usec - elapsed;
+		if (rem > 1e3)
+			usleep(rem / 2);
+		else
+			while (get_time(MICROSECOND) - start < usec)
+				;
+	}
 }

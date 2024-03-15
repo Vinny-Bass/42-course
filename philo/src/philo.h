@@ -7,31 +7,108 @@
 # include <unistd.h>
 # include <sys/time.h>
 # include <limits.h>
+# include <errno.h>
 
-typedef struct s_philo {
+typedef enum e_opcode
+{
+	LOCK,
+	UNLOCK,
+	INIT,
+	DESTROY,
+	CREATE,
+	JOIN,
+	DETACH,
+}	t_opcode;
+
+typedef enum e_time_code
+{
+	SECOND,
+	MILLISECOND,
+	MICROSECOND,
+}	t_time_code;
+
+typedef enum e_philo_status
+{
+	EATING,
+	SLEEPING,
+	THINKING,
+	TAKE_FIRST_FORK,
+	TAKE_SECOND_FORK,
+	DIED,
+}	t_philo_status;
+
+typedef pthread_mutex_t t_mtx;
+
+typedef struct s_state t_state;
+
+typedef struct	s_philo
+{
+	pthread_t		thread_id;
 	int				id;
 	int				eats;
-	int				max_eats;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				time_to_die;
-	struct timeval	last_meal_time;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*right_fork;
-	pthread_cond_t	*condition;
-} t_philo;
+	int				full;
+	long			last_meal_time;
+	t_mtx	*first_fork;
+	t_mtx	*second_fork;
+	t_mtx	philo_mutex;
+	t_state	*state;
+}	t_philo;
 
-void    validate_args(int argc, char **argv);
-int		init_philos(t_philo **philos, pthread_mutex_t **forks, char **argv, int max_eats);
-int		init_threads(pthread_t **threads, pthread_t **death_threads, int n_philosophers);
-long	get_elapsed_time(struct timeval *start);
-long	get_ts_in_ms();
-void	*dinning_handler(void *arg);
-void	*death_monitor(void *arg);
-void	print_red(char *msg, int id, long time);
-void	print_blue(char *msg, int id, long time);
-void	print_green(char *msg, int id, long time);
+struct	s_state
+{
+	int		n_philos;
+	int		max_meals;
+	int		time_to_die;
+	int		time_to_eat;
+	int		time_to_sleep;
+	long	start_sim;
+	int		simulation_finished;
+	int		all_threads_ready;
+	t_mtx	*forks;
+	t_philo	*philos;
+	t_mtx	table_mtx;
+	t_mtx	write_mtx;
+};
+
+// errors
+void	exit_error(char *err);
+
+// mutex getters and setters
+void	set_bool(t_mtx *mtx, int *dest, int value);
+void	set_long(t_mtx *mtx, long *dest, long value);
+long	get_long(t_mtx *mtx, long *value);
+int		get_bool(t_mtx *mtx, int *value);
+int		simulation_finished(t_state *state);
+
+// threads
+void	safe_thread_handler(pthread_t *thread, void *(*foo)(void *), void *data, t_opcode code);
+void	wait_all_threads(t_state *state);
+
+// time
+long	get_time(t_time_code code);
+void	ft_usleep(long usec, t_state *state);
+
+// utils
 int     ft_atoi(const char *str);
-void	exit_gracefully(t_philo *philos, pthread_mutex_t *forks);
+
+// output
+void	print_status(t_philo_status status, t_philo *philo);
+
+// memory
+void	*safe_malloc(char *label, size_t bytes);
+
+// mutex
+void	safe_mutex_handler(t_mtx *mtx, t_opcode code);
+void	think(t_philo *philo);
+
+// routines
+void	eat(t_philo *philo);
+
+// main
+void    validate_args(int argc, char **argv);
+void	parse_args(t_state *state, char **argv);
+void	init_state(t_state *state);
+void	init_philos(t_state *state);
+void	start_dinner(t_state *state);
 
 #endif

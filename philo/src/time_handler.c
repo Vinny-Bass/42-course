@@ -1,19 +1,16 @@
 #include "philo.h"
 
-long	get_elapsed_time(struct timeval *start)
+long	get_time(t_time_code code)
 {
-	struct timeval	now;
-	long			elapsed_time;
+	struct timeval	tv;
 
-	gettimeofday(&now, NULL);
-	elapsed_time = (now.tv_sec - start->tv_sec) * 1000 + (now.tv_usec - start->tv_usec) / 1000;
-	return (elapsed_time);
-}
-
-long	get_ts_in_ms()
-{
-	struct timeval	time;
-
-	gettimeofday(&time, NULL);
-	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+	if (gettimeofday(&tv, NULL))
+		exit_error("gettimeofday fail");
+	else if (code == SECOND)
+		return (tv.tv_sec + (tv.tv_usec / 1e6));
+	else if (code == MILLISECOND)
+		return ((tv.tv_sec * 1e3) + (tv.tv_usec / 1e3));
+	else if (code == MICROSECOND)
+		return ((tv.tv_sec * 1e6) + tv.tv_usec);
+	return (0);
 }

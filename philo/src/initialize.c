@@ -12,71 +12,52 @@
 
 #include "philo.h"
 
-static void	fill_philos(
-	char **argv, pthread_mutex_t **forks, \
-	t_philo **philos, int max_eats
-)
+static void	assign_forks(t_philo *philo, t_mtx *forks, int i)
+{
+	int	n;
+
+	n = philo->state->n_philos;
+	if (philo->id % 2 == 0)
+	{
+		philo->first_fork = &forks[i];
+		philo->second_fork = &forks[(i + 1) % n];
+	}
+	else
+	{
+		philo->first_fork = &forks[(i + 1) % n];
+		philo->second_fork = &forks[i];
+	}
+}
+
+void	init_state(t_state *state)
 {
 	int	i;
-	int	n_philosophers;
 
-	n_philosophers = ft_atoi(argv[1]);
-	i = 0;
-	while (i < n_philosophers)
-	{
-		pthread_mutex_init(&(*forks)[i], NULL);
-		(*philos)[i].id = i + 1;
-		(*philos)[i].eats = 0;
-		(*philos)[i].time_to_eat = ft_atoi(argv[3]);
-		(*philos)[i].time_to_sleep = ft_atoi(argv[4]);
-		(*philos)[i].time_to_die = ft_atoi(argv[2]);
-		(*philos)[i].max_eats = max_eats;
-		(*philos)[i].left_fork = &(*forks)[i];
-		(*philos)[i].right_fork = &(*forks)[(i + 1) % n_philosophers];
-		i++;
-	}
+	i = -1;
+	state->simulation_finished = 0;
+	state->all_threads_ready = 0;
+	state->philos = safe_malloc("philos", sizeof(t_philo) * state->n_philos);
+	state->forks = safe_malloc("forks", sizeof(t_mtx) * state->n_philos);
+	safe_mutex_handler(&state->write_mtx, INIT);
+	safe_mutex_handler(&state->table_mtx, INIT);
+	while (++i < state->n_philos)
+		safe_mutex_handler(&state->forks[i], INIT);
 }
 
-int	init_philos(
-	t_philo **philos, pthread_mutex_t **forks, \
-	char **argv, int max_eats
-)
+void	init_philos(t_state *state)
 {
-	int	n_philosophers;
+	int		i;
+	t_philo	*philo;
 
-	n_philosophers = ft_atoi(argv[1]);
-	(*philos) = malloc(sizeof(t_philo) * n_philosophers);
-	if (!(*philos))
+	i = -1;
+	while (++i < state->n_philos)
 	{
-		printf("\033[0;31mError trying to create philosophers\033[0m");
-		return (0);
+		philo = state->philos + i;
+		philo->id = i + 1;
+		philo->eats = 0;
+		philo->full = 0;
+		philo->state = state;
+		safe_mutex_handler(&philo->philo_mutex, INIT);
+		assign_forks(philo, state->forks, i);
 	}
-	(*forks) = malloc(sizeof(pthread_mutex_t) * n_philosophers);
-	if (!(*forks))
-	{
-		printf("\033[0;31mError trying to create forks\033[0m");
-		return (0);
-	}
-	fill_philos(argv, forks, philos, max_eats);
-	return (1);
-}
-
-int	init_threads(
-	pthread_t **threads, pthread_t **death_threads,
-	int n_philosophers
-)
-{
-	(*threads) = malloc(sizeof(pthread_t) * n_philosophers);
-	if (!(*threads))
-	{
-		printf("\033[0;31mError trying to create threads\033[0m");
-		return (0);
-	}
-	(*death_threads) = malloc(sizeof(pthread_t) * n_philosophers);
-	if (!(*death_threads))
-	{
-		printf("\033[0;31mError trying to create death threads\033[0m");
-		return (0);
-	}
-	return (1);
 }
