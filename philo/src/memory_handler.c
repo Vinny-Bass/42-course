@@ -11,3 +11,20 @@ void	*safe_malloc(char *label, size_t bytes)
 	}
 	return (res);
 }
+
+void	clean(t_state *state)
+{
+	t_philo *philo;
+	int		i;
+
+	i = -1;
+	while (++i < state->n_philos)
+	{
+		philo = state->philos + i;
+		safe_mutex_handler(&philo->philo_mutex, DESTROY);
+	}
+	safe_mutex_handler(&state->write_mtx, DESTROY);
+	safe_mutex_handler(&state->table_mtx, DESTROY);
+	free(state->forks);
+	free(state->philos);
+}

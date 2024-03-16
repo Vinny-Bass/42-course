@@ -36,6 +36,7 @@ void	init_state(t_state *state)
 	i = -1;
 	state->simulation_finished = 0;
 	state->all_threads_ready = 0;
+	state->n_threads_running = 0;
 	state->philos = safe_malloc("philos", sizeof(t_philo) * state->n_philos);
 	state->forks = safe_malloc("forks", sizeof(t_mtx) * state->n_philos);
 	safe_mutex_handler(&state->write_mtx, INIT);

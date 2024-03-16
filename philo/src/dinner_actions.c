@@ -18,5 +18,31 @@ void	eat(t_philo *philo)
 
 void	think(t_philo *philo)
 {
+	long	t_eat;
+	long	t_sleep;
+	long	t_think;
+
 	print_status(THINKING, philo);
+	if (philo->state->n_philos %2 == 0)
+		return ;
+	t_eat = philo->state->time_to_eat;
+	t_sleep = philo->state->time_to_sleep;
+	t_think = t_eat * 2 - t_sleep;
+	if (t_think < 0)
+		t_think = 0;
+	ft_usleep(t_think * 0.42, philo->state);
+}
+
+void	prevent_double_actions(t_philo *philo)
+{
+	if (philo->state->n_philos % 2 == 0)
+	{
+		if (philo->id % 2 == 0)
+			ft_usleep(3e4, philo->state);
+	}
+	else
+	{
+		if (philo->id % 2)
+			think(philo);
+	}
 }

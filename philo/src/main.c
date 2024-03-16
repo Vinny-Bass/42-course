@@ -9,5 +9,6 @@ int main(int argc, char **argv)
 	init_state(&state);
 	init_philos(&state);
 	start_dinner(&state);
+	clean(&state);
     return (0);
 }
