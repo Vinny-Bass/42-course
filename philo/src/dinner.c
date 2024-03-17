@@ -13,7 +13,7 @@ static void	*dinner_handler(void *data)
 	prevent_double_actions(philo);
 	while (!simulation_finished(philo->state))
 	{
-		if (philo->full)
+		if (get_bool(&philo->philo_mutex, &philo->full))
 			break ;
 		eat(philo);
 		print_status(SLEEPING, philo);
@@ -57,6 +57,7 @@ static void *dinner_monitor(void *data)
 {
 	t_state	*state;
 	int 	i;
+	int		is_eating;
 
 	state = (t_state *)data;
 	while (!all_threads_running(&state->table_mtx, &state->n_threads_running, state->n_philos))
@@ -66,7 +67,8 @@ static void *dinner_monitor(void *data)
 		i = -1;
 		while (++i < state->n_philos && !simulation_finished(state))
 		{
-			if (philo_died(state->philos + i))
+			is_eating = get_bool(&(state->philos + i)->philo_mutex, &(state->philos + i)->eating);
+			if (philo_died(state->philos + i) && !is_eating)
 			{
 				set_bool(&state->table_mtx, &state->simulation_finished, 1);
 				print_status(DIED, state->philos + i);

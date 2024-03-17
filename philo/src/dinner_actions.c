@@ -8,8 +8,10 @@ void	eat(t_philo *philo)
 	print_status(TAKE_SECOND_FORK, philo);
 	set_long(&philo->philo_mutex, &philo->last_meal_time, get_time(MILLISECOND));
 	philo->eats++;
+	set_bool(&philo->philo_mutex, &philo->eating, 1);
 	print_status(EATING, philo);
 	ft_usleep(philo->state->time_to_eat, philo->state);
+	set_bool(&philo->philo_mutex, &philo->eating, 0);
 	if (philo->state->max_meals > 0 && philo->eats == philo->state->max_meals)
 		set_bool(&philo->philo_mutex, &philo->full, 1);
 	safe_mutex_handler(philo->first_fork, UNLOCK);

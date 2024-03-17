@@ -57,6 +57,7 @@ void	init_philos(t_state *state)
 		philo->id = i + 1;
 		philo->eats = 0;
 		philo->full = 0;
+		philo->eating = 0;
 		philo->state = state;
 		safe_mutex_handler(&philo->philo_mutex, INIT);
 		assign_forks(philo, state->forks, i);

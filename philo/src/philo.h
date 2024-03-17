@@ -47,6 +47,7 @@ typedef struct	s_philo
 	int				id;
 	int				eats;
 	int				full;
+	int				eating;
 	long			last_meal_time;
 	t_mtx	*first_fork;
 	t_mtx	*second_fork;
