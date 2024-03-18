@@ -2,21 +2,21 @@ NAME = philo
 CC = cc
 CFLAGS = -Werror -Wall -Wextra
 
-SRCS =	src/arguments.c \
-		src/dinner_actions.c \
-		src/dinner.c \
-		src/errors.c \
-		src/ft_atoi.c \
-		src/initialize.c \
-		src/main.c \
-		src/memory_handler.c \
-		src/mutex_handler.c \
-		src/mutex_utils.c \
-		src/print_handler.c \
-		src/sync_handler.c \
-		src/thread_handler.c \
-		src/time_handler.c \
-		src/utils.c
+SRCS =	bonus/arguments.c \
+		bonus/dinner_actions.c \
+		bonus/dinner.c \
+		bonus/errors.c \
+		bonus/ft_atoi.c \
+		bonus/initialize.c \
+		bonus/main.c \
+		bonus/memory_handler.c \
+		bonus/semaphore_handler.c \
+		bonus/semaphore_utils.c \
+		bonus/print_handler.c \
+		bonus/sync_handler.c \
+		bonus/thread_handler.c \
+		bonus/time_handler.c \
+		bonus/utils.c
 OBJS = $(SRCS:.c=.o)
 
 GREEN				=	\033[0;32m
