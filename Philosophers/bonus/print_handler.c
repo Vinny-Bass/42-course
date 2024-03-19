@@ -34,10 +34,10 @@ void	print_status(t_philo_status status, t_philo *philo)
 {
 	long	elapsed;
 
-	elapsed = get_time(MILLISECOND) - philo->start_sim;
+	elapsed = get_time(MILLISECOND) - philo->state->start_sim;
 	if (philo->full)
 		return ;
-	safe_sem_handler(philo->write_sem, LOCK, "", 0);
+	safe_sem_handler(philo->state->write_sem, LOCK, "", 0);
 	if ((status == TAKE_FIRST_FORK || status == TAKE_SECOND_FORK))
 		print_blue("has taken a fork", philo->id, elapsed);
 	else if (status == EATING)	
@@ -49,5 +49,5 @@ void	print_status(t_philo_status status, t_philo *philo)
 	else if (status == DIED)
 		print_red("died", philo->id, elapsed);
 	if (status != DIED)
-		safe_sem_handler(philo->write_sem, UNLOCK, "", 0);
+		safe_sem_handler(philo->state->write_sem, UNLOCK, "", 0);
 }

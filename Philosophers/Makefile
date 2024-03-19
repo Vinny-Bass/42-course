@@ -11,9 +11,7 @@ SRCS =	bonus/arguments.c \
 		bonus/main.c \
 		bonus/memory_handler.c \
 		bonus/semaphore_handler.c \
-		bonus/semaphore_utils.c \
 		bonus/print_handler.c \
-		bonus/sync_handler.c \
 		bonus/thread_handler.c \
 		bonus/time_handler.c \
 		bonus/utils.c

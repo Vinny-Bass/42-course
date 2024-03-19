@@ -40,43 +40,43 @@ typedef enum e_philo_status
 	DIED,
 }	t_philo_status;
 
+typedef struct	s_state t_state;
+
 typedef struct	s_philo
 {
 	pid_t				pid;
-	pthread_t			monitor;
 	int					id;
 	int					eats;
 	int					full;
 	int					dead;
 	int					eating;
+	long				last_meal_time;
+	t_state				*state;
+}	t_philo;
+
+struct s_state
+{
+	pthread_t			death_monitor;
+	pthread_t			full_monitor;
 	int					n_philos;
 	long				start_sim;
 	int					max_meals;
 	int					time_to_die;
 	int					time_to_eat;
 	int					time_to_sleep;
-	long				last_meal_time;
 	sem_t				*forks;
+	sem_t				*simulation_finished;
+	sem_t				*simulation_start;
 	sem_t				*write_sem;
-	sem_t				*someone_died_sem;
-	sem_t				*table_sem;
-	sem_t				*death_sem;
-}	t_philo;
+	t_philo				*philos;
+};
 
 // errors
 void	exit_error(char *err);
 
-// semaphore getters and setters
-void	set_bool(sem_t *sem, int *dest, int value);
-// void	set_long(t_mtx *mtx, long *dest, long value);
-// long	get_long(t_mtx *mtx, long *value);
-// int		get_bool(sem_t *sem, int *value);
-// int		simulation_finished(t_state *state);
-
 // threads
 void	safe_thread_handler(pthread_t *thread, void *(*foo)(void *), void *data, t_opcode code);
-//void	wait_all_processes(t_state *state);
-int		all_processes_running(sem_t *sem, int *processes, int p_n);
+
 
 // time
 long	get_time(t_time_code code);
@@ -102,9 +102,10 @@ void	prevent_double_actions(t_philo *philo);
 
 // main
 void    validate_args(int argc, char **argv);
-void	parse_args(t_philo *philos, char **argv);
-void	init_philos(t_philo *philos, int n_philos);
-void	start_dinner(t_philo *philos);
-void	clean(t_philo *philos);
+void	parse_args(t_state *state, char **argv);
+void	init_state(t_state *state);
+void	init_philos(t_state *state);
+void	start_dinner(t_state *state);
+void	clean(t_state *state);
 
 #endif

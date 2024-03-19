@@ -12,26 +12,30 @@
 
 #include "philo.h"
 
-void	init_philos(t_philo *philos, int n_philos)
+void	init_state(t_state *state)
 {
-	int	i;
+	state->simulation_finished = safe_sem_handler(NULL, INIT, "sim_finished", 0);
+	state->simulation_start = safe_sem_handler(NULL, INIT, "sim_start", 0);
+	state->forks = safe_sem_handler(NULL, INIT, "forks", state->n_philos);
+	state->write_sem = safe_sem_handler(NULL, INIT, "write", 1);
+	state->philos = safe_malloc("philos", sizeof(t_philo) * state->n_philos);
+}
+
+void	init_philos(t_state *state)
+{
+	int		i;
+	t_philo	*philo;
 
 	i = -1;
-	sem_t *forks = safe_sem_handler(NULL, INIT, "forks", n_philos);
-	sem_t *write = safe_sem_handler(NULL, INIT, "write", 1);
-	sem_t *sim_finished = safe_sem_handler(NULL, INIT, "sim_finished", 0);
-	while (++i < n_philos)
+	while (++i < state->n_philos)
 	{
-		philos[i].pid = -1;
-		philos[i].id = i + 1;
-		philos[i].eats = 0;
-		philos[i].full = 0;
-		philos[i].dead = 0;
-		philos[i].start_sim = 0;
-		philos[i].eating = 0;
-		philos[i].forks = forks;
-		philos[i].write_sem = write;
-		philos[i].someone_died_sem = sim_finished;
-		philos[i].table_sem = safe_sem_handler(NULL, INIT, "table", 0);
+		philo = state->philos + i;
+		philo->id = i + 1;
+		philo->pid = -1;
+		philo->eats = 0;
+		philo->full = 0;
+		philo->dead = 0;
+		philo->eating = 0;
+		philo->state = state;
 	}
 }

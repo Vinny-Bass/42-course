@@ -61,20 +61,14 @@ void    validate_args(int argc, char **argv)
 	return ;
 }
 
-void	parse_args(t_philo *philos, char **argv)
+void	parse_args(t_state *state, char **argv)
 {
-	int i;
-
-	i = -1;
-	while (++i < ft_atoi(argv[1]))
-	{
-		philos[i].n_philos = ft_atoi(argv[1]);
-		philos[i].time_to_die = ft_atoi(argv[2]) * 1e3;
-		philos[i].time_to_eat = ft_atoi(argv[3]) * 1e3;
-		philos[i].time_to_sleep = ft_atoi(argv[4]) * 1e3;
-		if (argv[5])
-			philos[i].max_meals = ft_atoi(argv[5]);
-		else
-			philos[i].max_meals = -1;
-	}
+	state->n_philos = ft_atoi(argv[1]);
+	state->time_to_die = ft_atoi(argv[2]) * 1e3;
+	state->time_to_eat = ft_atoi(argv[3]) * 1e3;
+	state->time_to_sleep = ft_atoi(argv[4]) *1e3;
+	if (argv[5])
+		state->max_meals = ft_atoi(argv[5]);
+	else
+		state->max_meals = -1;
 }
