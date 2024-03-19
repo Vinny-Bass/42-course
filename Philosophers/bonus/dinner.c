@@ -25,6 +25,7 @@ static void *dinner_monitor(void *arg)
 		{
 			philo->dead = 1;
 			print_status(DIED, philo);
+			//safe_sem_handler(philo->write_sem, LOCK, "", 0);
 			safe_sem_handler(philo->someone_died_sem, UNLOCK, "", 0);
 			break ;
 		}
@@ -39,7 +40,7 @@ static void	dinner_handler(t_philo *philo)
 	safe_thread_handler(&philo->monitor, NULL, NULL, DETACH);
 	philo->last_meal_time = get_time(MILLISECOND);
 	prevent_double_actions(philo);
-	while (!philo->dead)
+	while (!philo->dead && !philo->full)
 	{
 		//safe_sem_handler(philo->someone_died_sem, LOCK, NULL, 0);
 		if (philo->max_meals != -1 && philo->eats >= philo->max_meals)
@@ -54,6 +55,18 @@ static void	dinner_handler(t_philo *philo)
 		//safe_sem_handler(philo->someone_died_sem, UNLOCK, NULL, 0);
 	}
 	exit(EXIT_SUCCESS);
+}
+
+static void *main_monitor(void *arg)
+{
+	t_philo *philos;
+
+	philos = (t_philo *)arg;
+	int i = -1;
+	while (++i < philos[0].n_philos)
+		waitpid(philos[i].pid, NULL, 0);
+	safe_sem_handler(philos[0].someone_died_sem, UNLOCK, "", 0);
+	return (NULL);
 }
 
 void	start_dinner(t_philo *philos)
@@ -81,8 +94,11 @@ void	start_dinner(t_philo *philos)
 		else
 			philos[i].pid = pid;
 	}
+	pthread_t test;
+	safe_thread_handler(&test, main_monitor, philos, CREATE);
 	i = -1;
 	while (++i < n_philos)
 		safe_sem_handler(philos[i].table_sem, UNLOCK, "", 0);
 	safe_sem_handler(sim_finished, LOCK, NULL, 0);
+	safe_thread_handler(&test, NULL, NULL, DETACH);
 }

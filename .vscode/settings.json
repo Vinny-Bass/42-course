@@ -36,6 +36,7 @@
 		"variant": "c",
 		"complex": "c",
 		"array": "c",
-		"future": "c"
+		"future": "c",
+		"philo.h": "c"
 	}
 }

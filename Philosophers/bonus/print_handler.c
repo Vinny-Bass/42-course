@@ -48,5 +48,6 @@ void	print_status(t_philo_status status, t_philo *philo)
 		print_blue("is thinking", philo->id, elapsed);
 	else if (status == DIED)
 		print_red("died", philo->id, elapsed);
-	safe_sem_handler(philo->write_sem, UNLOCK, "", 0);
+	if (status != DIED)
+		safe_sem_handler(philo->write_sem, UNLOCK, "", 0);
 }

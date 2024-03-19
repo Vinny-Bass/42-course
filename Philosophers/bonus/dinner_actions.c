@@ -12,8 +12,8 @@ void	eat(t_philo *philo)
 	print_status(EATING, philo);
 	ft_usleep(philo->time_to_eat);
 	philo->eating = 0;
-	// if (philo->max_meals > 0 && philo->eats == philo->state->max_meals)
-	// 	philo->full = 1;
+	if (philo->max_meals > 0 && philo->eats == philo->max_meals)
+		philo->full = 1;
 	safe_sem_handler(philo->forks, UNLOCK, "", 0);
 	safe_sem_handler(philo->forks, UNLOCK, "", 0);
 }
