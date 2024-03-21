@@ -74,7 +74,7 @@ an error.
 
 **1. Compiling the game**
 
-To compile, go to the library path and run:
+To compile, go to the library path and run (currently only working on linux):
 
 ```shell
 $ make
