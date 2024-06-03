@@ -23,4 +23,4 @@
 * [Push Swap](./Push_swap/) -> The goal is create an stack ordering algorithm that sort the stack using another stack and a limited set of instructions with the minimum of movements
 * [So_long](./So_long/) -> Create a 2D game
 * [Philosophers](./Philosophers/) -> Solve the philosophers dinning problem first using only threads and mutex then using only semaphores, threads and child processes.
-* Minishell -> The goal is to create your own shell. (loading...)
+* [Minishell](https://github.com/Vinny-Bass/minishell) -> The goal is to create your own shell.
