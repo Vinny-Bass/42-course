@@ -33,6 +33,7 @@ static void set_texture(char *line, char **texture)
 		free(arr[0]);
 		*texture = NULL;
 	}
+	free(arr);
 	return ;
 }
 

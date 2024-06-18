@@ -17,9 +17,11 @@ void	err_and_free_char(char *message, char *to_free)
 void	err_and_free_state(char *message, t_state *state)
 {
 	if (state->matrix)
-		free(state->matrix);
+		free_matrix(state);
 	if (state->raw_content)
 		free(state->raw_content);
+	free_textures(state);
+	free(state);
 	printf("Error\n%s\n", message);
 	exit(EXIT_FAILURE);
 }

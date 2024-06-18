@@ -7,7 +7,7 @@ static void	validate_args_count(int argc)
 	return ;
 }
 
-static void	validate_file(char *map_arg, int size)
+static void	validate_file_format(char *map_arg, int size)
 {
 	if (!ft_strnstr(map_arg, ".cub", size))
 		no_mem_free_err(WRONG_FILE_FORMAT_ERR);
@@ -24,6 +24,6 @@ void	validate_args(int argc, char **argv)
 	validate_args_count(argc);
 	map_arg = argv[1];
 	map_arg_len = ft_strlen(map_arg);
-	validate_file(map_arg, map_arg_len);
+	validate_file_format(map_arg, map_arg_len);
 	return ;
 }

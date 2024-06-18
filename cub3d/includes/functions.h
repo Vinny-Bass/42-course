@@ -31,4 +31,10 @@ void	parse_colours(t_state *state);
 // Validate if the file has the proper configs and have a map
 void	validate_file(t_state *state);
 
+// Free texures memory on state->map.style
+void free_textures(t_state *state);
+
+// Free matrix generated when parsing the file spliting by new line
+void free_matrix(t_state *state);
+
 #endif

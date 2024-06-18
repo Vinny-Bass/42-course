@@ -1,6 +1,6 @@
 NAME				=	cub3D
 CC					=	cc
-CFLAGS				=	-Wall -Wextra -Werror
+CFLAGS				=	-g -Wall -Wextra -Werror
 
 MLXFLAGS			=	-lmlx -lXext -lX11
 MATH_LIB			= 	-lm
@@ -19,6 +19,8 @@ SRCS		=	src/main.c 						\
 				src/errors/handler.c			\
 				src/file/read_file.c			\
 				src/file/validate_file.c		\
+				src/memory/free_textures.c		\
+				src/memory/free_matrix.c		\
 				src/state/init_state.c			\
 				src/textures/parse_textures.c	\
 
@@ -35,7 +37,7 @@ $(NAME): $(OBJS) $(LIBFT)
 	@echo "$(NAME): $(GREEN)$(NAME) was generated$(RESET)"
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 ${LIBFT}:
 	@make --no-print-directory -C $(LIBFT_DIR)
