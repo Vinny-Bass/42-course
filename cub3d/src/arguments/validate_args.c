@@ -3,29 +3,20 @@
 static void	validate_args_count(int argc)
 {
 	if (argc != 2)
-	{
-		printf("Invalid arguments, Usage: ./cub3D <path_to_map>\n");
-		exit(EXIT_FAILURE);
-	}
+		no_mem_free_err(WRONG_ARGS_ERR);
 	return ;
 }
 
 static void	validate_file(char *map_arg, int size)
 {
 	if (!ft_strnstr(map_arg, ".cub", size))
-	{
-		printf("The map should be in the '.cub' format\n");
-		exit(EXIT_FAILURE);
-	}
+		no_mem_free_err(WRONG_FILE_FORMAT_ERR);
 	if (open(map_arg, O_RDONLY) == -1)
-	{
-		printf("Invalid map file\n");
-		exit(EXIT_FAILURE);
-	}
+		no_mem_free_err(INVALID_MAP_ERR);
 	return ;
 }
 
-void	args_handler(int argc, char **argv)
+void	validate_args(int argc, char **argv)
 {
 	char	*map_arg;
 	int		map_arg_len;

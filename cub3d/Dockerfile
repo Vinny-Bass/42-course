@@ -1,9 +1,11 @@
 FROM ubuntu:latest
 
 RUN apt-get update && apt-get install -y \
-    && apt-get install libncurses5-dev -y \
-    && apt-get install libreadline-dev -y \
-    && apt-get install libbsd-dev -y \
+    libncurses5-dev \
+    libreadline-dev \
+    libbsd-dev \
+    libx11-dev \
+    libxkbfile-dev \
     build-essential \
     gdb \
     python3 \
@@ -12,7 +14,6 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 RUN pip3 install --upgrade pip setuptools --break-system-packages
-
 RUN pip3 install norminette --break-system-packages
 
 WORKDIR /usr/src/app

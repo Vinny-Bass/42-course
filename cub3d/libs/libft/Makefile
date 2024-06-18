@@ -42,7 +42,8 @@ SRCS 		= 	ft_isalpha.c 			\
 				ft_putendl_fd.c 		\
 				ft_putnbr_fd.c			\
 				ft_free_ptr.c			\
-				get_next_line.c			
+				get_next_line.c			\
+				ft_strappend.c			\
 
 BONUS_SRCS  	= 	ft_lstnew.c					\
 					ft_lstadd_front.c			\
@@ -77,11 +78,10 @@ bonus:		${NAME} ${BONUS_OBJS}
 
 clean:
 			@${REMOVE} ${OBJS} ${BONUS_OBJS}
-			@echo "$(GREY)Libft: object files were deleted$(RESET)"
+			@echo "$(NAME): $(RED)$(NAME) was deleted$(RESET)"
 
 fclean:		clean
 			@${REMOVE} ${NAME}
-			@echo "$(GREY)Libft: $(NAME) was deleted$(RESET)"
 
 re:			fclean ${NAME}
 

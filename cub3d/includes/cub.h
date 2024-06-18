@@ -7,16 +7,18 @@
 # include <signal.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdbool.h> 
 # include <X11/keysym.h>
 # include <X11/X.h>
 
 # include "../libs/mlx/mlx.h"
 # include "../libs/libft/libft.h"
 
+# include "errors.h"
+# include "structs.h"
+# include "functions.h"
 
 # define GAME_TITLE		"CUB 3D"
-
-// Arguments
-void	args_handler(int argc, char **argv);
+# define FILE_ARG		1
 
 #endif
