@@ -6,6 +6,9 @@
 // Initialize the game state
 t_state	*init_state(char *file_path);
 
+// Free all memory alocated to the game state
+void	free_state(t_state *state);
+
 // Display a simple error on terminal and exit the program.
 void	no_mem_free_err(char *message);
 // Display a simple error on terminal, free the string and exit the program.
@@ -33,6 +36,9 @@ void	validate_file(t_state *state);
 
 // Free texures memory on state->map.style
 void free_textures(t_state *state);
+
+// Free colours memory on state->map.style
+void free_colours(t_state *state);
 
 // Free matrix generated when parsing the file spliting by new line
 void free_matrix(t_state *state);

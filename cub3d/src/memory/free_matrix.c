@@ -11,5 +11,6 @@ void free_matrix(t_state *state)
 		i++;
 	}
 	free(state->matrix);
+	state->matrix = NULL;
 	return ;
 }

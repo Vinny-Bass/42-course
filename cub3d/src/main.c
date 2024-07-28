@@ -18,6 +18,6 @@ int	main(int argc, char **argv)
 	// mlx_hook(state->win, KeyPress, KeyPressMask, input_handler, state);
 	// mlx_loop_hook(state->mlx, loop_hook, state);
 	// mlx_loop(state->mlx);
-	// free_memory(state);
+	free_state(state);
 	return (0);
 }

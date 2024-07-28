@@ -20,8 +20,10 @@ SRCS		=	src/main.c 						\
 				src/file/read_file.c			\
 				src/file/validate_file.c		\
 				src/memory/free_textures.c		\
+				src/memory/free_colours.c		\
 				src/memory/free_matrix.c		\
 				src/state/init_state.c			\
+				src/state/free_state.c			\
 				src/textures/parse_textures.c	\
 
 OBJS = $(SRCS:.c=.o)

@@ -24,6 +24,7 @@ static void set_texture(char *line, char **texture)
 	arr = ft_split(line, ' ');
 	if (arr && arr[1])
 	{
+		free(*texture);
 		*texture = ft_strdup(arr[1]);
 		free(arr[0]);
 		free(arr[1]);

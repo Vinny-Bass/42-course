@@ -20,6 +20,7 @@ static void set_colour(char *line, char **colour)
 	arr = ft_split(line, ' ');
 	if (arr && arr[1])
 	{
+		free(*colour);
 		*colour = ft_strdup(arr[1]);
 		free(arr[0]);
 		free(arr[1]);
@@ -29,6 +30,7 @@ static void set_colour(char *line, char **colour)
 		free(arr[0]);
 		*colour = NULL;
 	}
+	free(arr);
 	return ;
 }
 
