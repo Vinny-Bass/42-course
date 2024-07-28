@@ -7,6 +7,7 @@ static void	init_map_state(t_state *state)
 	state->map.style.so = NULL;
 	state->map.style.we = NULL;
 	state->map.style.ea = NULL;
+	state->map.map_start_row = -1;
 	state->map.style.floor_rgb = NULL;
 	state->map.style.ceiling_rgb = NULL;
 	return ;

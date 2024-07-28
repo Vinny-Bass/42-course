@@ -41,22 +41,43 @@ static void set_texture(char *line, char **texture)
 void	parse_textures(t_state *state)
 {
 	int		i;
-	char	*line;
+	char	*row;
 
 	i = 0;
 	while (state->matrix[i])
 	{
-		line = state->matrix[i];
-		if (line[0] == 'N')
-			set_texture(line, &state->map.style.no);
-		if (line[0] == 'S')
-			set_texture(line, &state->map.style.so);
-		if (line[0] == 'E')
-			set_texture(line, &state->map.style.ea);
-		if (line[0] == 'W')
-			set_texture(line, &state->map.style.we);
+		row = state->matrix[i];
+		if (row[0] == 'N')
+			set_texture(row, &state->map.style.no);
+		if (row[0] == 'S')
+			set_texture(row, &state->map.style.so);
+		if (row[0] == 'E')
+			set_texture(row, &state->map.style.ea);
+		if (row[0] == 'W')
+			set_texture(row, &state->map.style.we);
 		i++;
 	}
 	validate_textures(state);
 	return ;
 }
+
+	// char	*file_content;
+
+	// file_content = read_file(file_path);
+	// line_len = 0;
+	// state->map.rows = 0;
+	// while (1)
+	// {
+	// 	line_tmp = get_next_line(map_fd);
+	// 	if (!line_tmp)
+	// 		break ;
+	// 	validate_line(state, &line_tmp, &line_len, map_tmp);
+	// 	append_line_to_map(&map_tmp, line_tmp);
+	// 	free(line_tmp);
+	// 	state->map.rows++;
+	// }
+	// close(map_fd);
+	// check_for_empty_line(map_tmp, state);
+	// state->map.full = ft_split(map_tmp, '\n');
+	// init_map(state);
+	// free(map_tmp);

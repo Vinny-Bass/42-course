@@ -20,6 +20,7 @@ typedef struct s_player
 typedef struct s_map
 {
 	char			**full;
+	int				map_start_row;
 	int				rows;
 	int				columns;
 	int				players;
