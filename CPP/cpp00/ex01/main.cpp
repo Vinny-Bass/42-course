@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "PhoneBook.h"
+#include "utils.h"
 
 int main()
 {
@@ -12,10 +13,8 @@ int main()
         std::cout << "\nEnter command(ADD, SEARCH, EXIT): ";
         std::getline(std::cin, command);
 
-        for (char &c : command)
-        {
-            c = std::toupper(c);
-        }
+        for (size_t i = 0; i < command.length(); i++)
+            command[i] = std::toupper(command[i]);
 
         if (command == "EXIT")
         {
@@ -25,7 +24,7 @@ int main()
         else if (command == "ADD")
             addContact(PhoneBook);
         else if (command == "SEARCH")
-            searchContact(phoneBook);
+            searchContact(PhoneBook);
         else
             std::cout << "Invalid command!" << std::endl;
     }

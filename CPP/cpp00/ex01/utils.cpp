@@ -1,6 +1,4 @@
 #include "utils.h"
-#include <iostream>
-#include <iomanip>
 
 std::string getValidInput(const std::string &fieldName)
 {
@@ -36,4 +34,74 @@ void addContact(PhoneBook &phoneBook)
 
     phoneBook.addContact(newContact);
     std::cout << "Contact added successfully!" << std::endl;
+}
+
+std::string formatColumn(const std::string &text, size_t width)
+{
+    if (text.length() > width)
+        return text.substr(0, width - 1) + ".";
+
+    return std::string(width - text.length(), ' ') + text;
+}
+
+void displayContactList(const PhoneBook &phoneBook, std::ostream &out)
+{
+    out << "|" << formatColumn("INDEX", 10)
+        << "|" << formatColumn("FIRST NAME", 10)
+        << "|" << formatColumn("LAST NAME", 10)
+        << "|" << formatColumn("NICKNAME", 10)
+        << "|" << std::endl;
+
+    out << std::string(44, '-') << std::endl;
+
+    for (int i = 0; i < phoneBook.getSize(); i++)
+    {
+        Contact contact = phoneBook.getContact(i);
+        std::stringstream ss;
+        ss << i;
+        out << "|" << formatColumn(ss.str(), 10)
+            << "|" << formatColumn(contact.getFirstName(), 10)
+            << "|" << formatColumn(contact.getLastName(), 10)
+            << "|" << formatColumn(contact.getNickname(), 10)
+            << "|" << std::endl;
+    }
+}
+
+void searchContact(const PhoneBook &phoneBook)
+{
+    if (phoneBook.getSize() == 0)
+    {
+        std::cout << "Phonebook is empty!" << std::endl;
+        return;
+    }
+
+    displayContactList(phoneBook);
+
+    std::cout << "\nEnter index to display: ";
+    std::string input;
+    std::getline(std::cin, input);
+
+    try
+    {
+        std::istringstream iss(input);
+        int index;
+        if (!(iss >> index))
+            throw "Invalid index!";
+        if (index >= 0 && index < phoneBook.getSize())
+        {
+            Contact contact = phoneBook.getContact(index);
+            std::cout << "\nContact details:" << std::endl;
+            std::cout << "First name: " << contact.getFirstName() << std::endl;
+            std::cout << "Last name: " << contact.getLastName() << std::endl;
+            std::cout << "Nickname: " << contact.getNickname() << std::endl;
+            std::cout << "Phone number: " << contact.getPhoneNumber() << std::endl;
+            std::cout << "Darkest secret: " << contact.getDarkestSecret() << std::endl;
+        }
+        else
+            std::cout << "Invalid index!" << std::endl;
+    }
+    catch (...)
+    {
+        std::cout << "Invalid input!" << std::endl;
+    }
 }

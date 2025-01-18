@@ -16,7 +16,6 @@ public:
     Contact();
 
     void setFirstName(const std::string &name);
-    void setFirstName(const std::string &name);
     void setLastName(const std::string &name);
     void setNickname(const std::string &nick);
     void setPhoneNumber(const std::string &number);
