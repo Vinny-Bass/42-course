@@ -65,7 +65,7 @@ void testPhoneBookIntegration()
     std::stringstream output;
     displayContactList(pb, output);
 
-    std::string expected = "|         0|      Vinny|       Bass|        JD|";
+    std::string expected = "|         0|     Vinny|      Bass|        JD|";
     assert(output.str().find(expected) != std::string::npos);
 }
 
@@ -74,9 +74,9 @@ int main()
     testContact();
     testPhoneBook();
     testUtils();
-    std::cout << "All unit tests passed!" << std::endl;
+    std::cout << "✅ \033[32mAll unit tests passed!\033[0m" << std::endl;
 
     testPhoneBookIntegration();
-    std::cout << "All integration tests passed!" << std::endl;
+    std::cout << "✅ \033[32mAll integration tests passed!\033[0m" << std::endl;
     return 0;
 }

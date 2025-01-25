@@ -8,11 +8,11 @@ BOLD = \033[1m
 CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++98
 
-TARGET = phonebook
-TEST_TARGET = test_phonebook
+TARGET = account
+TEST_TARGET = test_account
 
-SOURCES = $(filter-out main.cpp, $(wildcard *.cpp))
-TEST_SOURCES = $(wildcard tests/*.cpp) $(SOURCES)
+SOURCES = Account.cpp
+TEST_SOURCES = tests.cpp $(SOURCES)
 
 OBJECTS = $(SOURCES:.cpp=.o)
 TEST_OBJECTS = $(TEST_SOURCES:%.cpp=%.o)
