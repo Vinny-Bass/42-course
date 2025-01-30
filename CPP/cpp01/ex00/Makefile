@@ -8,11 +8,11 @@ BOLD = \033[1m
 CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++98
 
-TARGET = account
-TEST_TARGET = test_account
+TARGET = zombie
+TEST_TARGET = test_zombie
 
-SOURCES = Account.cpp
-TEST_SOURCES = tests.cpp $(SOURCES)
+SOURCES = $(filter-out main.cpp, $(wildcard *.cpp))
+TEST_SOURCES = $(wildcard tests/*.cpp) $(SOURCES)
 
 OBJECTS = $(SOURCES:.cpp=.o)
 TEST_OBJECTS = $(TEST_SOURCES:%.cpp=%.o)
@@ -44,7 +44,7 @@ clean:
 fclean: clean
 	@echo "$(BLUE)🧹 Cleaning exec files...$(RESET)"
 	@rm -f $(TARGET) $(TEST_TARGET)
-	@rm -f *.o
+	@rm -f tests/*.o
 	@echo "$(GREEN)✨ Exec files clean!$(RESET)"
 
 re: fclean all

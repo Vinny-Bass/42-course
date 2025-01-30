@@ -11,8 +11,8 @@ CXXFLAGS = -Wall -Wextra -std=c++98
 TARGET = phonebook
 TEST_TARGET = test_phonebook
 
-SOURCES = $(filter-out main.cpp, $(wildcard *.cpp))
-TEST_SOURCES = $(wildcard tests/*.cpp) $(SOURCES)
+SOURCES = Contact.cpp PhoneBook.cpp utils.cpp
+TEST_SOURCES = tests/main_test.cpp $(SOURCES)
 
 OBJECTS = $(SOURCES:.cpp=.o)
 TEST_OBJECTS = $(TEST_SOURCES:%.cpp=%.o)
