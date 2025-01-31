@@ -62,7 +62,7 @@ void Account::displayAccountsInfos(void)
 
 void Account::_displayTimestamp(void)
 {
-    time_t now = time(nullptr);
+    time_t now = time(NULL);
     struct tm *ltm = localtime(&now);
 
     char buffer[20];

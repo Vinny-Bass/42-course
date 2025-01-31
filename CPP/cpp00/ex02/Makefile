@@ -8,33 +8,22 @@ BOLD = \033[1m
 CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++98
 
-TARGET = account
-TEST_TARGET = test_account
+TARGET = test_account
 
-SOURCES = Account.cpp
-TEST_SOURCES = tests.cpp $(SOURCES)
+SOURCES = Account.cpp tests.cpp
 
 OBJECTS = $(SOURCES:.cpp=.o)
-TEST_OBJECTS = $(TEST_SOURCES:%.cpp=%.o)
 
 all: $(TARGET)
 	@echo "$(GREEN)✨ Compiled with success!$(RESET)"
 
-$(TARGET): main.cpp $(OBJECTS)
+$(TARGET): $(OBJECTS)
 	@echo "$(PURPLE)🔨 Building the exec...$(RESET)"
 	@$(CXX) $(CXXFLAGS) $^ -o $(TARGET)
 
 %.o: %.cpp
 	@echo "$(CYAN)📝 Compiling $<...$(RESET)"
 	@$(CXX) $(CXXFLAGS) -c $< -o $@
-
-test: $(TEST_TARGET)
-	@echo "$(PURPLE)🔨 Running tests...$(RESET)"
-	@./$(TEST_TARGET)
-
-$(TEST_TARGET): $(TEST_OBJECTS)
-	@echo "$(PURPLE)🔨 Building tests...$(RESET)"
-	@$(CXX) $(CXXFLAGS) $^ -o $@
 
 clean:
 	@echo "$(BLUE)🧹 Cleaning object files...$(RESET)"
@@ -43,10 +32,10 @@ clean:
 
 fclean: clean
 	@echo "$(BLUE)🧹 Cleaning exec files...$(RESET)"
-	@rm -f $(TARGET) $(TEST_TARGET)
+	@rm -f $(TARGET)
 	@rm -f *.o
 	@echo "$(GREEN)✨ Exec files clean!$(RESET)"
 
 re: fclean all
 
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re
