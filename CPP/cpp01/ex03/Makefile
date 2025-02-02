@@ -9,13 +9,10 @@ CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++98
 
 TARGET = zombie
-TEST_TARGET = test_zombie
 
-SOURCES = Zombie.cpp newZombie.cpp randomChump.cpp
-TEST_SOURCES = $(wildcard tests/*.cpp) $(SOURCES)
+SOURCES = Zombie.cpp zombieHorde.cpp
 
 OBJECTS = $(SOURCES:.cpp=.o)
-TEST_OBJECTS = $(TEST_SOURCES:%.cpp=%.o)
 
 all: $(TARGET)
 	@echo "$(GREEN)✨ Compiled with success!$(RESET)"
@@ -28,14 +25,6 @@ $(TARGET): main.cpp $(OBJECTS)
 	@echo "$(CYAN)📝 Compiling $<...$(RESET)"
 	@$(CXX) $(CXXFLAGS) -c $< -o $@
 
-test: $(TEST_TARGET)
-	@echo "$(PURPLE)🔨 Running tests...$(RESET)"
-	@./$(TEST_TARGET)
-
-$(TEST_TARGET): $(TEST_OBJECTS)
-	@echo "$(PURPLE)🔨 Building tests...$(RESET)"
-	@$(CXX) $(CXXFLAGS) $^ -o $@
-
 clean:
 	@echo "$(BLUE)🧹 Cleaning object files...$(RESET)"
 	@rm -f $(OBJECTS) $(TARGET)
@@ -43,10 +32,9 @@ clean:
 
 fclean: clean
 	@echo "$(BLUE)🧹 Cleaning exec files...$(RESET)"
-	@rm -f $(TARGET) $(TEST_TARGET)
-	@rm -f tests/*.o
+	@rm -f $(TARGET)
 	@echo "$(GREEN)✨ Exec files clean!$(RESET)"
 
 re: fclean all
 
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re
