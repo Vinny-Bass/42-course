@@ -1,4 +1,4 @@
-NAME		=	unnecessary_violence
+NAME		=	harl_2.0
 
 CC			=	c++
 
@@ -19,7 +19,7 @@ UP			=	\033[A
 CUT			=	\033[K
 
 #source files
-SRC_FILES	=	main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
+SRC_FILES	=	main.cpp Harl.cpp
 
 OBJ_FILES	=	$(SRC_FILES:.cpp=.o)
 
